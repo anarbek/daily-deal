@@ -1,0 +1,629 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Web.Mvc;
+using aGrouponClasses.Models;
+using aGrouponClasses.Utils;
+using B2B.BLL;
+using B2B.Models;
+using aGrouponClasses.Repositories;
+using aGrouponClasses.Payment;
+using System.Web;
+
+namespace aGrouponProjectMain.Controllers {
+    public class DealController : Controller {
+        private readonly IUSERRepository _userRepository;
+        private readonly IDealRepository _dealRepository;
+        private readonly IGroupRepository _groupRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICouponRepository _couponRepository;
+        private readonly IOrderRepository _orderRepository;
+        private readonly IPaymentMessageRepository _paymentMessageRepository;
+
+
+        public DealController(IUSERRepository userRepository, IDealRepository dealRepository, IGroupRepository groupRepository,
+            ICategoryRepository categoryRepository, ICouponRepository couponRepository,
+            IOrderRepository orderRepository, IPaymentMessageRepository paymentMessageRepository) {
+            _userRepository = userRepository;
+            _dealRepository = dealRepository;
+            _groupRepository = groupRepository;
+            _categoryRepository = categoryRepository;
+            _couponRepository = couponRepository;
+            _orderRepository = orderRepository;
+            _paymentMessageRepository = paymentMessageRepository;
+        }
+
+        public DealController()
+            : this(new USERRepositoryEF(), new DealRepositoryEF(), new GroupRepositoryEF(),
+            new CategoryRepositoryEF(),
+            new CouponRepositoryEF(), new OrderRepositoryEF(), new PaymentMessageRepositoryEF()) {
+        }
+
+        #region Admin Side
+        [Authorize(Roles = "Admin")]
+        public ActionResult AdminIndex(int? DealStatus) {
+            if (DealStatus == null) DealStatus = (int)Enums.enmDealStatus.TodayDeals;
+            tDealAdminModel customCouponModel = new tDealAdminModel();
+            customCouponModel.DealStatus = (int)DealStatus;
+            customCouponModel.DealStatusName = DealStatus.ToString();
+            return View(customCouponModel);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create() {
+            ViewBag.userData = _userRepository.GetListByIDRole((int)Enums.enmRoles.Partner);
+            ViewBag.groupData = _groupRepository.All;
+            ViewBag.categoryData = _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.DealCategory);
+            ViewBag.possibleCities = _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.City);
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public WrappedJsonResult CreateAjax(tDeal dealData) {
+            if (ModelState.IsValid) {
+                ArrangeCityData(dealData);
+                ArrangeImages(dealData);
+                dealData.DateAdded = DateTime.Now;
+                if (dealData.DateStarting < DateTime.Now)
+                return new WrappedJsonResult {
+                    Data = new {
+                        objectAddedName = dealData.DealTitle,
+                        valid = false,
+                        Message = CustomMessages.ErrorMessage("DateStarting must be greater than now...")
+                    }
+                };
+                if (dealData.DateEnding < DateTime.Now)
+                    return new  WrappedJsonResult{Data = new {
+                        objectAddedName = dealData.DealTitle,
+                        valid = false,
+                        Message = CustomMessages.ErrorMessage("DateEnding must be greater than now...")
+                    }};
+                if (dealData.DateEnding <= dealData.DateStarting)
+                    return new WrappedJsonResult{ Data=new {
+                        objectAddedName = dealData.DealTitle,
+                        valid = false,
+                        Message = CustomMessages.ErrorMessage("DateEnding must follow Beginning Date")
+                    }};
+                _dealRepository.InsertOrUpdate(dealData);
+                return new WrappedJsonResult{ Data = new {
+                    objectAddedName = dealData.DealTitle,
+                    valid = true,
+                    Message = CustomMessages.SuccessMessage("Deal was added Succesfully")
+                }};
+            }
+            return new WrappedJsonResult{ Data = new {
+                objectAddedName = "",
+                valid = false,
+                Message = CustomMessages.ErrorMessage("Fill All Fields please")
+            }};
+        }
+
+        [Authorize(Roles = "Admin")]
+        public JsonResult GetDealJSonByDealStatus(int? DealStatus) {
+            if (DealStatus == null) DealStatus = (int)Enums.enmDealStatus.TodayDeals;
+            List<tDeal> dealList = _dealRepository.GetListByDealStatus((int)DealStatus);
+            List<tDealAdminIndexJson> res = new List<tDealAdminIndexJson>();
+
+            int i, n = dealList.Count;
+            //res[0] = new string[n][];
+            for (i = 0; i < n; i++) {
+                string lnkDetail =
+                    "<a name=\"RowDelete\" href=\"/Deal/Edit/" + dealList[i].IDDeal + "\">Edit</a>";
+                tDealAdminIndexJson obj = new tDealAdminIndexJson {
+                    ID = dealList[i].IDDeal,
+                    Title = dealList[i].DealTitle,
+                    Category = dealList[i].tCategory.Name,
+                    Price = dealList[i].DealPrice,
+                    lnkDelete =
+                        "<a name=\"RowDelete\" onclick=\"PrepareDelete(this);return false;\" href=\"#\">Delete</a> | " + lnkDetail,
+                    chkCheck = "<input type=\"checkbox\" />"
+                };
+                //tCouponForAdminIndexJson obj = new tCouponForAdminIndexJson {
+                //    Partner = couponList[i].tUser.UserName, Code = couponList[i].Code,
+                //    CustomCode = couponList[i].CustomCode, CouponValue = couponList[i].CouponValue,
+                //    DateBegin = couponList[i].DateBegin, DateEnd = couponList[i].DateEnd,
+                //    DateAdded = couponList[i].DateAdded
+                //};
+                //tCouponForAdminIndexJson obj = new tCouponForAdminIndexJson();
+                //string[] str = new string[10];
+                //str[0] = "<input type=\"checkbox\" />";
+                //str[1] = dealList[i].IDCoupon.ToString();
+                //str[2] = dealList[i].tUser.UserName;
+                //str[3] = dealList[i].Code;
+                //str[4] = dealList[i].CustomCode;
+                //str[5] = dealList[i].CouponValue.ToString();
+                //str[6] = dealList[i].DateBegin.ToString("dd.MM.yyyy");
+                //str[7] = dealList[i].DateEnd.ToString("dd.MM.yyyy");
+                //str[8] = dealList[i].DateAdded.ToString("dd.MM.yyyy");
+                //string lnkDelete = "";
+                //if (CouponType == (int)aGrouponClasses.Utils.Enums.enmCoupontype.Usable || CouponType == (int)aGrouponClasses.Utils.Enums.enmCoupontype.Expired) {
+                //    lnkDelete = "<a name=\"RowDelete\" onclick=\"PrepareDelete(this);return false;\" href=\"#\">Delete</a>";
+                //}
+                //str[9] = lnkDelete;
+                //res[i] = str;
+                res.Add(obj);
+            }
+            return Json(new {
+                sEcho = 1,
+                iTotalRecords = res.Count,
+                iTotalDisplayRecords = res.Count,
+                aaData = res
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public JsonResult DeleteDeal(int id) {
+            _dealRepository.Delete(id);
+            return Json(new {
+                valid = true,
+                Message = "Deal was deleted Succesfully",
+                redirect = "/Deal/AdminIndex"
+            });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public JsonResult DeleteMultiple(int[] array) {
+            if (array == null)
+                return Json(new {
+                    valid = false,
+                    Message = CustomMessages.ErrorMessage("Please provide deals to be deleted"),
+                    redirect = "none"
+                });
+            if (array.Length == 0)
+                return Json(new {
+                    valid = false,
+                    Message = CustomMessages.ErrorMessage("Please provide deals to be deleted"),
+                    redirect = "none"
+                });
+            int deleted = _dealRepository.Delete(array);
+            if (deleted == 0)
+                return Json(new {
+                    valid = false,
+                    Message = CustomMessages.ErrorMessage("deals couldn't be deleted"),
+                    redirect = "none"
+                });
+            return Json(new {
+                valid = true,
+                Message = CustomMessages.SuccessMessage(array.Length + " deals were deleted succesfully"),
+                redirect = "/Deal/AdminIndex"
+            });
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit(int id) {
+            ViewBag.userData = _userRepository.GetListByIDRole((int)Enums.enmRoles.Partner);
+            ViewBag.groupData = _groupRepository.All;
+            ViewBag.categoryData = _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.DealCategory);
+            ViewBag.possibleCities = _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.City);
+            tDeal currentDeal = _dealRepository.Find(id);
+            return View(currentDeal);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public WrappedJsonResult EditAjax(tDeal dealData) {
+            
+            if (ModelState.IsValid) {
+                ArrangeCityData(dealData);
+                ArrangeImages(dealData);
+
+                _dealRepository.InsertOrUpdate(dealData);
+                return new WrappedJsonResult {
+                    Data = new {
+                        objectAddedName = "",
+                        valid = true,
+                        Message = CustomMessages.SuccessMessage("tDeal Updated Succesfully")
+                    }
+                };
+            } else {
+                return new WrappedJsonResult {
+                    Data = new {
+                        objectAddedName = "",
+                        valid = false,
+                        Message = CustomMessages.ErrorMessage("Fill All Fields please")
+                    }
+                };
+            }
+        }
+
+        private void ArrangeImages(tDeal dealData)
+        {
+            HttpPostedFileBase ProductImage = Request.Files["ProductImage"];
+            HttpPostedFileBase ProductImage1 = Request.Files["ProductImage1"];
+            HttpPostedFileBase ProductImage2 = Request.Files["ProductImage2"];
+
+            if (ProductImage.ContentLength > 0) {
+                var fileName = Path.GetFileName(ProductImage.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/Deal"), fileName);
+                ProductImage.SaveAs(path);
+                dealData.ProductImage = fileName;
+            }
+
+            if (ProductImage1.ContentLength > 0) {
+                var fileName = Path.GetFileName(ProductImage1.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/Deal"), fileName);
+                ProductImage1.SaveAs(path);
+                dealData.ProductImage1 = fileName;
+            }
+
+            if (ProductImage2.ContentLength > 0) {
+                var fileName = Path.GetFileName(ProductImage2.FileName);
+                var path = Path.Combine(Server.MapPath("~/Images/Deal"), fileName);
+                ProductImage2.SaveAs(path);
+                dealData.ProductImage2 = fileName;
+            }
+        }
+
+        private void ArrangeCityData(tDeal dealData) {
+            if (dealData.HelperString != null) {
+                string[] arr = dealData.HelperString.Split(',');
+                if (arr.Length > 0) {
+                    int[] intArr = new int[arr.Length];
+                    for (int i = 0; i < intArr.Length; i++) {
+                        dealData.tDealCities.Add(new tDealCity { IDCity = int.Parse(arr[i]), IDDeal = dealData.IDDeal });
+                    }
+                }
+                dealData.HelperString = null;
+            }
+        }
+
+        //[Authorize(Roles="Admin")]
+        //[ChildActionOnly]
+        //public ActionResult DealCities(tDeal deal)
+        //{
+        //    return PartialView(deal);
+        //}
+
+        #endregion
+
+        #region UserSide
+        public ActionResult DealsByCategory(int? IDCity) {
+            tCategory cat;
+            if (IDCity == null)
+                IDCity = 1;
+            cat = _categoryRepository.Find((int)IDCity);
+            if (cat == null) cat = new tCategory();
+            List<tDeal> deals = _dealRepository.GetListByCity((int)IDCity).OrderByDescending(t=>t.DateAdded).ToList();
+            tDealFrontEndModel model = new tDealFrontEndModel();
+            model.currentCat = cat;
+            model.currentDeals = deals;
+            return View(model);
+        }
+
+        public ActionResult DealsByGroup(int? IDGroup) {
+            int idgr = 0;
+            int currIDCity = 0;
+            if (CommonUtils.Instance.SelectedCity.IDCategory == 0)
+                currIDCity = 1;
+            else
+                currIDCity = CommonUtils.Instance.SelectedCity.IDCategory;
+            if (IDGroup == null) idgr = 1;
+            else
+                idgr = (int)IDGroup;
+            ViewBag.CurrGroup = _groupRepository.Find(idgr);
+            List<tDeal> dealsForThisGroup = _dealRepository.GetListByCityAndGroup(currIDCity, idgr);
+            return View(dealsForThisGroup);
+        }
+
+        public ActionResult Details(int? id) {
+            if (id == null) id = 0;
+            tDeal deal = _dealRepository.Find((int)id);
+
+            ViewBag.LeftTSStr = tDealUtils.GetLeftTSStrForDeal(deal);
+            ViewBag.DealsBySameCategory = _dealRepository.GetListByIDCategory(deal.IDDealCategory).Take(6).OrderByDescending(t=>t.DateAdded).ToList();
+
+            return View(deal);
+        }
+
+        [Authorize]
+        public ActionResult Buy(int? id) {
+            if (id == null) id = 0;
+            tDealBuyModel finalmodel = new tDealBuyModel();
+            tDeal deal = _dealRepository.Find((int)id);
+            finalmodel.currentDeal = deal;
+            finalmodel.Quantity = deal.QuantityMinimum;
+            finalmodel.IDDeal = (int)id;
+            return View(finalmodel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult BuyProduct(tDealBuyModel currentCheckoutData) {
+            if (ModelState.IsValid) {
+                CommonUtils.Instance.ShoppingCart = new tShoppingCart();
+                CommonUtils.Instance.ShoppingCart.IDDeal = currentCheckoutData.IDDeal;
+                CommonUtils.Instance.ShoppingCart.Quantity = currentCheckoutData.Quantity;
+                CommonUtils.Instance.ShoppingCart.BuyerNotes = currentCheckoutData.BuyerNotes;
+                CommonUtils.Instance.ShoppingCart.MobilePhone = currentCheckoutData.MobilePhone;
+                return RedirectToAction("Checkout", "Deal");
+            }
+            return View(currentCheckoutData);
+        }
+        [Authorize]
+        public ActionResult Checkout() {
+            int IDDeal = CommonUtils.Instance.ShoppingCart.IDDeal;
+            tDeal currentDeal = _dealRepository.Find(IDDeal);
+            tDealBuyModel buyModel = new tDealBuyModel();
+            buyModel.currentDeal = currentDeal;
+            buyModel.IDDeal = IDDeal;
+            buyModel.Quantity = CommonUtils.Instance.ShoppingCart.Quantity;
+            buyModel.BuyerNotes = CommonUtils.Instance.ShoppingCart.BuyerNotes;
+            buyModel.MobilePhone = CommonUtils.Instance.ShoppingCart.MobilePhone;
+
+            //if (id == null) id = 0;
+            //tDeal deal = _dealRepository.Find((int)id);
+            //return View(deal);
+            return View(buyModel);
+        }
+
+        decimal CalculateAmountToBePaid(tDeal deal, int Amount) {
+            return deal.DealPrice * Amount;
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult MakePayment(tDealBuyModel currentCheckoutData) {
+            currentCheckoutData.Quantity = CommonUtils.Instance.ShoppingCart.Quantity;
+            currentCheckoutData.BuyerNotes = CommonUtils.Instance.ShoppingCart.BuyerNotes;
+            currentCheckoutData.MobilePhone = CommonUtils.Instance.ShoppingCart.MobilePhone;
+
+            PaymentResultModel resModel = new PaymentResultModel();
+            resModel.IDDeal = currentCheckoutData.IDDeal;
+            int UserID = (int)MembershipHelper.GetCurrenUser().ProviderUserKey;
+            tOrder ordData = _orderRepository.GetOrderByIDDealIDUser(currentCheckoutData.IDDeal, UserID);
+            tDeal currentDeal = _dealRepository.Find(currentCheckoutData.IDDeal);
+            tDealBuyModel buyModel = GetBuyModel(currentDeal);
+            if (ordData != null && ordData.tCoupon.ConsumeStatus == (int)Enums.enmCouponConsumeStatus.NotConsumed) {
+                resModel.PaymentStatus = false;
+                resModel.StatusMessage += "You have already bought this deal, please use it's coupon and try again";
+                ModelState.AddModelError("Error", resModel.StatusMessage);
+                
+                return View("Checkout", buyModel);
+            }
+
+            
+            ValidateDeal(currentDeal);
+            if (!ModelState.IsValid) {
+                resModel.PaymentStatus = false;
+                resModel.StatusMessage += "Deal Error";
+                ModelState.AddModelError("Error", resModel.StatusMessage);
+
+                return View("Checkout", buyModel);
+            }
+            if (currentCheckoutData.Quantity < currentDeal.QuantityMinimum) {
+                resModel.PaymentStatus = false;
+                resModel.StatusMessage += "Minimum Quantity allowed :" + currentDeal.QuantityMinimum;
+                ModelState.AddModelError("Error", resModel.StatusMessage);
+                return View("Checkout", buyModel);
+            }
+
+            List<tCoupon> couponsForThisPartner = _couponRepository.GetListByIDPartnerNotUsedAndNotConsumed(currentDeal.IDPartner);
+            if (couponsForThisPartner == null || couponsForThisPartner.Count == 0) {
+                resModel.PaymentStatus = false;
+                resModel.StatusMessage += "Coupon info could't be found, please contact web admin";
+                currentCheckoutData.currentDeal = currentDeal;
+                ModelState.AddModelError("Error", resModel.StatusMessage);
+                return View("Checkout", buyModel);
+            }
+            tCoupon currCouponToUse = couponsForThisPartner[0];
+            resModel.CouponCode = currCouponToUse.CustomCode;
+            currCouponToUse.CouponStatus = (int)Enums.enmCouponStatus.Used;
+            IPayment paymentAgent = new PaymentAgentBeelineKg();
+            decimal AmountToBePaid = CalculateAmountToBePaid(currentDeal, currentCheckoutData.Quantity);
+            if (AmountToBePaid <= 0) {
+                resModel.PaymentStatus = false;
+                resModel.StatusMessage += "Please verify amount to be paid for this deal!";
+                ModelState.AddModelError("Error", resModel.StatusMessage);
+                return View("Checkout", buyModel);
+            }
+            PaymentBLL pBLL = new PaymentBLL();
+            bool paymentResult = pBLL.MakePayment(AmountToBePaid, paymentAgent);
+            resModel.StatusMessage = pBLL.StatusMessage;
+            resModel.PaymentStatus = paymentResult;
+            resModel.CouponCode = currCouponToUse.CustomCode;
+
+            if (paymentAgent.GetType() == typeof(PaymentAgentBeelineKg)) {
+                System.Guid uniqueID = Guid.NewGuid();
+                tPaymentMessage msg = new tPaymentMessage();
+                msg.UniqueID = uniqueID.ToString();
+                msg.IDDeal = currentCheckoutData.IDDeal;
+                msg.IDUsed = UserID;
+                msg.SMSCode = pBLL.PaymentCode;
+                msg.DateAdded = DateTime.Now;
+                msg.Approved = false;
+                _paymentMessageRepository.InsertOrUpdate(msg);
+                resModel.PaymentType = (int)Enums.enmPaymentType.BeelineKG;
+                resModel.SMSUniqueID = uniqueID.ToString();
+            } else {
+                //Burdan aşağısı sadece kredikartı için çalışır
+                _couponRepository.InsertOrUpdate(currCouponToUse);
+
+                tOrder order = new tOrder();
+                order.AmountPaid = AmountToBePaid;
+                order.BuyerNotes = CommonUtils.Instance.ShoppingCart.BuyerNotes;
+                order.IDCoupon = currCouponToUse.IDCoupon;
+                order.IDDeal = currentDeal.IDDeal;
+
+                order.IDUserBought = UserID;
+                order.MobilePhoneNo = CommonUtils.Instance.ShoppingCart.MobilePhone;
+                order.OrderNotes = currentCheckoutData.OrderNotes;
+                CommonUtils.Instance.ShoppingCart.OrderNotes = currentCheckoutData.OrderNotes;
+                order.OrderStatus = (int)Enums.enmOrderStatus.ToBePaid;
+                order.PaymentType = (int)Enums.enmPaymentType.BeelineKG;
+                order.Quantity = currentCheckoutData.Quantity;
+                order.RefundStatus = (int)Enums.enmRefundStatus.OrderSuccessful;
+                _orderRepository.InsertOrUpdate(order);
+
+                if (paymentResult) {
+                    _orderRepository.Save();
+                    _couponRepository.Save();
+                }
+            }
+            return View(resModel);
+        }
+
+        private tDealBuyModel GetBuyModel(tDeal currentDeal)
+        {
+            tDealBuyModel buyModel = new tDealBuyModel();
+            buyModel.currentDeal = currentDeal;
+            buyModel.Quantity = CommonUtils.Instance.ShoppingCart.Quantity;
+            buyModel.BuyerNotes = CommonUtils.Instance.ShoppingCart.BuyerNotes;
+            buyModel.MobilePhone = CommonUtils.Instance.ShoppingCart.MobilePhone;
+            return buyModel;
+        }
+
+        private void ValidateDeal(tDeal currentDeal) {
+            if (currentDeal == null) {
+                ModelState.AddModelError("DealInfo", "Deal Info couldn't be found, please contact web admin");
+            }
+            if (DateTime.Now < currentDeal.DateStarting) {
+                ModelState.AddModelError("DealInfo", "Deal has not started yet.");
+            }
+            if (DateTime.Now > currentDeal.DateEnding) {
+                ModelState.AddModelError("DealInfo", "Deal is over.");
+            }
+            //if (currentCheckoutData.Quantity > currentDeal.LimitUpper) {
+            //    resModel.PaymentStatus = false;
+            //    resModel.StatusMessage += "Maximum Amount allowed :" + currentDeal.LimitUpper;
+            //    return View(resModel);
+            //}
+            //if (currentCheckoutData.Quantity < currentDeal.LimitLower) {
+            //    resModel.PaymentStatus = false;
+            //    resModel.StatusMessage += "Minimum Amount allowed :" + currentDeal.LimitUpper;
+            //    return View(resModel);
+            //}
+        }
+
+        public ActionResult SMSMessageApprove(PaymentResultModel inputModel) {
+
+            int UserID = (int)MembershipHelper.GetCurrenUser().ProviderUserKey;
+            PaymentResultModel resModel = new PaymentResultModel();
+            resModel = inputModel;
+            tPaymentMessage msg = _paymentMessageRepository.Find(inputModel.SMSUniqueID);
+            if (msg == null) {
+                resModel.PaymentStatus = false;
+                resModel.StatusMessage += "SMS Code not found :" + msg.UniqueID;
+                ModelState.AddModelError("SMSStatus", resModel.StatusMessage);
+                return View("MakePayment", inputModel);
+            }
+            if (inputModel.PaymentCode != msg.SMSCode) {
+                resModel.PaymentStatus = false;
+                resModel.StatusMessage += "SMS Code is wrong :" + msg.UniqueID;
+                ModelState.AddModelError("SMSStatus", resModel.StatusMessage);
+                return View("MakePayment", inputModel);
+            }
+
+            tDeal currentDeal = _dealRepository.Find(inputModel.IDDeal);
+            ValidateDeal(currentDeal);
+            if (!ModelState.IsValid) {
+                resModel.PaymentStatus = false;
+                resModel.StatusMessage += "Deal Error";
+                ModelState.AddModelError("SMSStatus", resModel.StatusMessage);
+                return View("MakePayment", inputModel);
+            }
+
+            List<tCoupon> couponsForThisPartner = _couponRepository.GetListByIDPartnerNotUsedAndNotConsumed(currentDeal.IDPartner);
+            if (couponsForThisPartner == null || couponsForThisPartner.Count == 0) {
+                resModel.PaymentStatus = false;
+                resModel.StatusMessage += "Coupon info could't be found, please contact web admin";
+                ModelState.AddModelError("SMSStatus", resModel.StatusMessage);
+                return View("MakePayment", inputModel);
+            }
+            tCoupon currCouponToUse = couponsForThisPartner[0];
+            resModel.CouponCode = currCouponToUse.CustomCode;
+            currCouponToUse.CouponStatus = (int)Enums.enmCouponStatus.Used;
+            decimal AmountToBePaid = CalculateAmountToBePaid(currentDeal, inputModel.Quantity);
+            if (AmountToBePaid <= 0) {
+                resModel.PaymentStatus = false;
+                resModel.StatusMessage += "Please verify amount to be paid for this deal!";
+                ModelState.AddModelError("SMSStatus", resModel.StatusMessage);
+                return View("MakePayment", inputModel);
+            }
+
+            resModel.StatusMessage = "Your Order has been approved succesfully!";
+            resModel.PaymentStatus = true;
+            _couponRepository.InsertOrUpdate(currCouponToUse);
+
+            tOrder order = new tOrder();
+            order.AmountPaid = AmountToBePaid;
+            order.BuyerNotes = CommonUtils.Instance.ShoppingCart.BuyerNotes;
+            order.IDCoupon = currCouponToUse.IDCoupon;
+            order.IDDeal = currentDeal.IDDeal;
+
+            order.IDUserBought = UserID;
+            order.MobilePhoneNo = CommonUtils.Instance.ShoppingCart.MobilePhone;
+            order.OrderNotes = CommonUtils.Instance.ShoppingCart.OrderNotes;
+            order.OrderStatus = (int)Enums.enmOrderStatus.ToBePaid;
+            order.PaymentType = (int)Enums.enmPaymentType.BeelineKG;
+            order.Quantity = CommonUtils.Instance.ShoppingCart.Quantity;
+            order.RefundStatus = (int)Enums.enmRefundStatus.OrderSuccessful;
+            _orderRepository.InsertOrUpdate(order);
+
+            if (resModel.PaymentStatus) {
+                _orderRepository.Save();
+                _couponRepository.Save();
+            }
+
+
+            return View(resModel);
+
+        }
+
+        #endregion
+    }
+
+    public class WrappedJsonResult : JsonResult {
+        public override void ExecuteResult(ControllerContext context) {
+            context.HttpContext.Response.Write("<html><body><textarea id=\"jsonResult\" name=\"jsonResult\">");
+            base.ExecuteResult(context);
+            context.HttpContext.Response.Write("</textarea></body></html>");
+            context.HttpContext.Response.ContentType = "text/html";
+        }
+    }
+    public class tDealAdminIndexJson {
+        public string chkCheck { get; set; }
+        public int ID { get; set; }
+        public string Title { get; set; }
+        public string Category { get; set; }
+        public decimal Price { get; set; }
+        public string lnkDelete { get; set; }
+    }
+    public class tDealAdminModel {
+        public string DealStatusName { get; set; }
+        public int DealStatus { get; set; }
+    }
+
+    public class tDealAdminModelWithCityData {
+        public tDeal currDeal { get; set; }
+        public int[] CityArray { get; set; }
+    }
+
+    public class tDealFrontEndModel {
+        public tCategory currentCat { get; set; }
+        public List<tDeal> currentDeals { get; set; }
+    }
+
+    public class tDealBuyModel {
+        public int Quantity { get; set; }
+        public int IDDeal { get; set; }
+        public tDeal currentDeal { get; set; }
+        public string MobilePhone { get; set; }
+        public string BuyerNotes { get; set; }
+        public string OrderNotes { get; set; }
+    }
+
+    public class PaymentResultModel {
+        public bool PaymentStatus { get; set; }
+        public string StatusMessage { get; set; }
+        public string CouponCode { get; set; }
+        public string PaymentCode { get; set; }
+        public int PaymentType { get; set; }
+        public string SMSUniqueID { get; set; }
+        public int Quantity { get; set; }
+        public int IDDeal { get; set; }
+    }
+}

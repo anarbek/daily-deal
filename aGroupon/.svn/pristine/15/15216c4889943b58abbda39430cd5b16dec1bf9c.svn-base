@@ -1,0 +1,11 @@
+﻿@model IEnumerable< aGrouponClasses.Models.tGroup>
+<div class="nav left" style="padding-top:0px;padding-bottom:15px;padding-left:0px;">
+<ul class="sf-menu sf-js-enabled sf-shadow">         
+<li><a href="/Deal/DealsByCategory?IDCity=@ViewBag.currentIDCity">All</a></li>  
+@foreach (aGrouponClasses.Models.tGroup item in Model) {
+
+<li><a href="/Deal/DealsByGroup?IDGroup=@item.IDGroup">@item.Name </a></li>
+
+}
+</ul>
+</div>

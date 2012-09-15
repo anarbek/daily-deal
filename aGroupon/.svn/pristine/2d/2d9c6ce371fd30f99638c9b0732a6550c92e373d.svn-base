@@ -1,0 +1,58 @@
+﻿<!------ HEADER ------>
+<div class="header">
+    <div class="wrapper">
+        <div class="header-left">
+            <!--LOGO-->
+            <div class="logo left">
+                <a href="index.php">
+                    <img src="@Url.Content("~/mainSiteTemplate/style/img/logo.png")" alt="Logo" title="logo" /></a>
+            </div>
+            @Html.Action("CitySelector", "Category")
+            <!--MENU-->
+            <div class="nav left">
+                <ul class="sf-menu">
+                    <li style="padding-left: 0px;"><a href="@Url.Content("~/")">Home</a></li>
+                    <li><a href="@Url.Content("~/Home/About")">About</a> </li>
+                    <li>@Html.Action("PartialFrontEndTopMenu", "Category") </li>
+                    @if (Request.IsAuthenticated) {
+
+                        <li><a href="#">My Account</a>
+                            <ul class="sub-menu">
+                                <li><a href="/User/MyCoupons">My Coupons</a></li>
+                                <li><a href="/User/MyOrders">My Orders</a></li>
+                            </ul>
+                        </li>
+                    }
+                    <li style="padding-right: 0;"><a href="contact.php">
+                        <img src="@Url.Content("~/mainSiteTemplate/style/img/menu-contact.png")" alt="images" title="images" /></a></li>
+                </ul>
+            </div>
+            <!--/nav-->
+        </div>
+        <!--header-left-->
+        <div class="header-right">
+            <div class="header-right-background">
+                <h3>
+                    Sign up for free to get deals directly to your mailbox</h3>
+                <!--SEARCH-->
+                <div class="search-header">
+                    <div class="sidebar_widget_holder">
+                        <form id="searchform">
+                        <input id="s" class="idleField" onfocus="if(value==defaultValue)value=''" onblur="if(value=='')value=defaultValue"
+                            value="Enter Your E-mail Address" name="name" />
+                        <a id="searchsubmit" href="#">Subscribe Me</a>
+                        </form>
+                    </div>
+                    <!--/sidebar_widget_holder-->
+                </div>
+                <!--search-header-->
+                <div class="pecat">
+                </div>
+            </div>
+            <!--header-right-background-->
+        </div>
+        <!--header-right-->
+    </div>
+    <!--/wrapper-->
+</div>
+<!--/header-->

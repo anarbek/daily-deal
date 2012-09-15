@@ -1,0 +1,79 @@
+﻿@model aGrouponClasses.Models.tCategory
+
+@{
+    ViewBag.Title = "Create1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create1</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>tCategory</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IDCategoryType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IDCategoryType)
+            @Html.ValidationMessageFor(model => model.IDCategoryType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.IDGroup)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.IDGroup)
+            @Html.ValidationMessageFor(model => model.IDGroup)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Slug)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Slug)
+            @Html.ValidationMessageFor(model => model.Slug)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.InitialLetter)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.InitialLetter)
+            @Html.ValidationMessageFor(model => model.InitialLetter)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DisplayFlag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DisplayFlag)
+            @Html.ValidationMessageFor(model => model.DisplayFlag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Sort)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Sort)
+            @Html.ValidationMessageFor(model => model.Sort)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

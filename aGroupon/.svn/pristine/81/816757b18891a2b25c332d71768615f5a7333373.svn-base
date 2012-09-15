@@ -1,0 +1,35 @@
+﻿@model aGrouponProjectMain.Controllers.tDealBuyModel
+
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Buy</h2>
+@using (Html.BeginForm("MakePayment", "Deal", FormMethod.Post, new { id = "add-form", @class = "stdform stdform2" })) {
+<fieldset>
+    <legend>tDeal</legend>
+
+   
+    <div class="display-label">DealTitle</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.currentDeal.DealTitle)
+    </div>
+   <div class="display-label">@Html.LabelFor(model=>model.Quantity)</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Quantity)
+    </div>
+     @Html.ValidationMessageFor(model => model.Quantity)
+
+     <div class="display-label">@Html.LabelFor(model => model.OrderNotes)</div>
+    <div class="display-field">
+        @Html.TextAreaFor(model => model.OrderNotes)
+    </div>
+     @Html.ValidationMessageFor(model => model.OrderNotes)
+
+     @Html.HiddenFor(model => model.IDDeal)
+      @Html.HiddenFor(model => model.Quantity)
+    <button type="submit">Make Payment</button>
+   
+</fieldset>
+}

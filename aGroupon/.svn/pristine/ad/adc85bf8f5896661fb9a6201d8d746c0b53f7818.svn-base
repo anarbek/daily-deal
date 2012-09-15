@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dealers</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css" />
+<link href="style/reset.css" rel="stylesheet" type="text/css" />
+<link href="style/about.css" rel="stylesheet" type="text/css" />
+<link href="style/portfolio.css" rel="stylesheet" type="text/css" />
+<link href="style/blog.css" rel="stylesheet" type="text/css" />
+<link href="style/blog-post.css" rel="stylesheet" type="text/css" />
+<link href="style/contact.css" rel="stylesheet" type="text/css" />
+<link href="style/404.css" rel="stylesheet" type="text/css" />
+
+<!--[if IE 8]>
+<link rel="stylesheet" href="css/ie8.css" media="screen, projection" type="text/css" >
+<![endif]-->
+
+
+</head>
+<body>
+
+<div id="container">
+
+
+
+    <!------ CONTENT ------>
+    <div class="content">
+        <div class="wrapper">
+
+            <!--LOGO-->
+            <div class="login-logo">
+                <div class="logo-login-link">
+                    <a href="index.php"><img src="style/img/logo.png" alt="Logo" title="logo" /></a>
+                </div>
+            </div>
+
+
+            <div class="content-login">
+                <h4>Welcome back, login to your account</h4>
+
+                <!--FORM-->
+                <div class="form-login">
+
+                    <form method="post" action="">
+                        <div class="form-content-login">
+                            <input type="text" onfocus="if(value==defaultValue)value=''" onblur="if(value=='')value=defaultValue" value="Username" name="username" />
+                            <input type="text" onfocus="if(value==defaultValue)value=''" onblur="if(value=='')value=defaultValue" value="Password" name="pass" />
+                         </div><!--/form-content-login-->
+
+                        <div class="form-button">
+                            <a href="#">
+                                <div class="button-send">
+                                    <div class="button-send-left left"></div>
+                                    <div class="button-send-center left">Login</div>
+                                    <div class="button-send-right left"></div>
+                                </div>
+                            </a>
+                        </div><!--/form-button-->
+
+                    </form>
+                </div><!--/form-login-->
+
+
+
+                <div class="login-links"><a href="#">Lost your password?</a></div>
+
+
+            </div><!--content-login-->
+
+        </div><!--/wrapper-->
+    </div><!--/content-->
+
+
+
+
+    <!------ FOOTER ------>
+    <div class="footer">
+        <div class="wrapper">
+
+            
+            <!--FOOTER-COPY-->
+            <div class="footer-copy">
+                <div class="copy-text">
+                    Copyright Information Goes Here 2010. All Rights Reserved.<br />
+                    Designed by  <a href="#">Themesaholic</a>
+                </div><!--copy-text-->
+            </div><!--footer-copy-->
+
+
+
+        </div><!--/wrapper-->
+    </div><!--/footer-->
+
+
+</div><!--/container-->
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+﻿@model IEnumerable<aGrouponClasses.Models.tDeal>
+
+@{
+    ViewBag.Title = "DealsByGroup";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="content-others left">
+    @{Html.RenderAction("DealsByCityTabbedMenu", "Group");}
+            <h1> @ViewBag.CurrGroup.Name </h1>
+                @Html.Partial("DealsByCategoryPartial",@Model)                         
+    </div>

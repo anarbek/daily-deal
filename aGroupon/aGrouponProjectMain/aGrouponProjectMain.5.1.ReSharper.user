@@ -1,0 +1,85 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="FFB699D2-D87C-433E-9A63-2C1E23DF191C/d:Repositories/f:ContentRepositoryEF.cs" caret="951" fromTop="20" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Content/f:_CreateOrEdit.cshtml" caret="1686" fromTop="40" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Content/f:Create.cshtml" caret="1609" fromTop="34" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Content/f:Edit.cshtml" caret="2180" fromTop="37" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:ContentController.cs" caret="1531" fromTop="15" />
+      <File id="FFB699D2-D87C-433E-9A63-2C1E23DF191C/d:Utils/f:Enums.cs" caret="2809" fromTop="48" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:Edit.cshtml" caret="0" fromTop="0" />
+      <File id="FFB699D2-D87C-433E-9A63-2C1E23DF191C/d:Repositories/f:OrderRepository.cs" caret="0" fromTop="0" />
+      <File id="FFB699D2-D87C-433E-9A63-2C1E23DF191C/d:Repositories/f:CategoryRepository.cs" caret="2618" fromTop="29" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/f:test.htm" caret="0" fromTop="0" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Coupon/f:_CouponsListPartial.cshtml" caret="658" fromTop="11" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Scripts/d:Custom/f:CustomAdminListFunctions.js" caret="1123" fromTop="0" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:_CreateOrEdit.cshtml" caret="5738" fromTop="118" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Order/f:_OrderListPartial.cshtml" caret="0" fromTop="0" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:OrderController.cs" caret="3054" fromTop="16" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Order/f:AdminIndex.cshtml" caret="0" fromTop="0" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Order/f:_CreateOrEdit.cshtml" caret="2598" fromTop="31" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:DealController.cs" caret="29962" fromTop="25" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:CouponController.cs" caret="1307" fromTop="0" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Order/f:Edit.cshtml" caret="4013" fromTop="26" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:GroupController.cs" caret="811" fromTop="23" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Scripts/d:Custom/f:CustomAdminFunctions.js" caret="603" fromTop="17" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:Create.cshtml" caret="1086" fromTop="0" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:CategoryController.cs" caret="3983" fromTop="19" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Coupon/f:AdminIndex.cshtml" caret="1551" fromTop="20" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Category/f:AdminIndex.cshtml" caret="964" fromTop="0" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:_DealListPartial.cshtml" caret="1354" fromTop="28" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:AdminIndex.cshtml" caret="1184" fromTop="21" />
+      <File id="FFB699D2-D87C-433E-9A63-2C1E23DF191C/d:Utils/f:tDealUtils.cs" caret="0" fromTop="0" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Account/f:LogOn.cshtml" caret="1357" fromTop="0" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:_DealListPartial.cshtml" caret="196" fromTop="3" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:AdminIndex.cshtml" caret="4817" fromTop="32" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:AdminIndex.cshtml" caret="1611" fromTop="26" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:AdminIndex.cshtml" caret="624" fromTop="9" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:AdminIndex.cshtml" caret="2011" fromTop="38" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:AdminIndex.cshtml" caret="4173" fromTop="50" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:DealController.cs" caret="4806" fromTop="17" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:DealController.cs" caret="7934" fromTop="51" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:AdminIndex.cshtml" caret="691" fromTop="5" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:DealController.cs" caret="9530" fromTop="36" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:DealController.cs" caret="9687" fromTop="40" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:DealController.cs" caret="10642" fromTop="39" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:DealController.cs" caret="11333" fromTop="42" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:DealController.cs" caret="11385" fromTop="43" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:Create.cshtml" caret="260" fromTop="5" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:_CreateOrEdit.cshtml" caret="1912" fromTop="36" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:_CreateOrEdit.cshtml" caret="2657" fromTop="41" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:AdminIndex.cshtml" caret="4528" fromTop="7" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:_DealListPartial.cshtml" caret="692" fromTop="14" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:_DealListPartial.cshtml" caret="1044" fromTop="21" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:_DealListPartial.cshtml" caret="1531" fromTop="31" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:DealController.cs" caret="9021" fromTop="24" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:OrderController.cs" caret="3587" fromTop="51" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:OrderController.cs" caret="3421" fromTop="43" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:OrderController.cs" caret="1106" fromTop="16" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:OrderController.cs" caret="2489" fromTop="43" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Order/f:AdminIndex.cshtml" caret="950" fromTop="15" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:OrderController.cs" caret="2863" fromTop="14" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:OrderController.cs" caret="3408" fromTop="25" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:OrderController.cs" caret="3073" fromTop="16" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir>C:\Program Files (x86)\NUnit 2.5.10\bin\net-2.0\</NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+</Configuration>

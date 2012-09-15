@@ -1,0 +1,58 @@
+﻿@model aGrouponClasses.Models.tContent
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CustomJS{
+    <script type="text/javascript" src="@Url.Content("~/adminTemplate/js/plugins/jquery.validate.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/CustomAdminFunctions.js")"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            var AddForm = jQuery("#add-form");
+            var submitBtn = jQuery("#btnSubmit");
+            ArrangeSubmitForm(AddForm, submitBtn);
+        });
+
+        function ArrangeSubmitForm(formToSubmit, submitBt) {
+            formToSubmit.submit(function (event) {
+                // Stop full page load
+                event.preventDefault();
+                if (ajaxValidate(formToSubmit, submitBt)) {
+                    var data = { Code: jQuery('#Code').val(),
+                        Name: jQuery('#Name').val(),
+                        Description: jQuery('#Description').val()
+                    };
+                    var target = jQuery(this).attr('action');
+                    SubmitData(target, submitBt, data);
+                }
+            });
+        }      
+    </script>
+}
+<div class="pageheader">
+    <ul class="hornav">
+        <li class="current"><a href="#cats">Content Add Form</a></li>
+    </ul>
+</div>
+<!--pageheader-->
+<div id="contentwrapper" class="contentwrapper">
+    <div id="cats" class="subcontent">
+        @using (Html.BeginForm("Create", "Content", FormMethod.Post, new { id = "add-form", @class = "stdform stdform2" })) {
+            @Html.ValidationSummary(true)
+           
+           @Html.Partial("_CreateOrEdit", Model)
+                        
+            <p class="stdformbutton">
+                <button class="submit radius2" id="btnSubmit">
+                    Create Content</button>
+                <input type="reset" class="reset radius2" value="Reset Form" />
+            </p>
+        }
+        <br />
+    </div>
+    <!-- #cities -->
+    <p>
+        @Html.ActionLink("Back to List", @Url.Content("~/AdminIndex"))
+    </p>
+</div>
+<!--contentwrapper-->

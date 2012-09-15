@@ -1,0 +1,80 @@
+﻿@model IEnumerable<aGrouponClasses.Models.tCoupon>
+
+@{
+    ViewBag.Title = "CouponsList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="pageheader">
+    <h1 class="pagetitle">
+        Deal</h1>
+    <span class="pagedesc"></span>
+    <ul class="hornav">
+        <li class="current"><a href="#Coupons">Coupons</a></li>
+    </ul>
+</div>
+<!--pageheader-->
+<div id="contentwrapper" class="contentwrapper">
+    <div id="Coupons" class="subcontent">
+        <p id="DescriptionDiv">
+        </p>
+        <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+        <colgroup>
+                <col class="con0">
+                <col class="con1">
+                <col class="con0">
+                <col class="con1">
+                <col class="con0">
+                <col class="con1">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="head0">
+                        No
+                    </th>
+                    <th class="head1">
+                        Deal name
+                    </th>
+                    <th class="head0">
+                        Buyer
+                    </th>
+                    
+                    <th class="head1">
+                        Due time
+                    </th>
+                    <th class="head0">
+                        Coupon Status
+                    </th>
+                    <th class="head1">
+                        Consume Status
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDCoupon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tOrders.FirstOrDefault().tDeal.DealTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tOrders.FirstOrDefault().tDeal.tUser.UserName)
+                    </td>
+                    <td>
+                       @Html.DisplayFor(modelItem => item.DateEnd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CouponStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ConsumeStatus)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <!-- #cities -->
+</div>
+<!--contentwrapper-->
+

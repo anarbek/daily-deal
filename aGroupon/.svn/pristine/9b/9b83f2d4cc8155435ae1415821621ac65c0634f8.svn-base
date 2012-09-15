@@ -1,0 +1,44 @@
+﻿ @model aGrouponClasses.Models.tDeal
+ <!-- BLOG -->
+                    <div class="blog-home">
+                        <div class="blog-left">
+                            <div class="single-deals-title">@Html.DisplayFor(model => model.DealTitle)</div><!--/title-blog-->
+                            <div class="images">
+                                <img src="@Url.Content("~/Images/Deal/" + Model.ProductImage)" alt="images" title="images"  />
+                            </div><!--/images-->
+                            <div class="single-deals-text">
+                                @Html.Raw(@Model.Introduction)
+                            </div><!--/text-->
+                        </div><!--/blog-left-->
+
+                        <div class="blog-right">
+                            <div class="blog-right-text">
+                                <span style="padding-top: 22px;">@if (aGrouponClasses.Utils.tDealUtils.DealIsActive(Model)) {<text>This deal will end in:</text>}</span><br />
+                                <p style="padding-top: 12px;">@ViewBag.LeftTSStr</p><br />
+                                <span style="padding-top: 25px; margin-bottom: -10px;">Discount</span><br />
+                                <h5>@aGrouponClasses.Utils.tDealUtils.DiscountStr(Model)</h5>
+                                <div class="blog-right-dwo">
+                                    <span>Deal Value</span><br />
+                                    <p style="margin-top: 0;">@String.Format("{0:##.##} som", @Model.MarketPrice)</p>
+                                </div><!--blog-right-dwo-->
+                                <div class="blog-right-dwo">
+                                    <span>You Save</span><br />
+                                    <p style="margin-top: 0;">@String.Format("{0:00.0} som", @Model.MarketPrice - @Model.DealPrice)</p>
+                                </div><!--blog-right-dwo-->
+
+                                <div class="twitter-facebook">titivıt</div>
+                            </div><!--blog-right-text-->
+
+                            <div class="blog-right-button">
+                            @if (aGrouponClasses.Utils.tDealUtils.DealIsActive(Model)) {
+                                <a href="@Url.Action("Buy", "Deal", new { id = @Model.IDDeal })">
+                                    <div class="button">
+                                        <div class="blog-right-left"></div>
+                                        <div class="blog-right-center">Buy this deal - @String.Format("{0:##.##}", @Model.DealPrice)</div>
+                                        <div class="blog-right-right"></div>
+                                    </div>
+                                </a><!--/button-->
+                            }
+                            </div><!--/blog-right-button-->
+                        </div><!--blog-right-->
+                    </div><!--blog-home-->

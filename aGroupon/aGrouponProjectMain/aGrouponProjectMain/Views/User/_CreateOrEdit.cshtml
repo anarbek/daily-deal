@@ -1,0 +1,66 @@
+﻿@model aGrouponClasses.Models.tUser
+           
+            <fieldset>
+                <p id="DescriptionDiv">
+                </p>
+            </fieldset>
+             <p>
+                @Html.LabelFor(model => model.UserName)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.UserName)
+            </p>
+
+             <p>
+                @Html.LabelFor(model => model.Password)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.Password, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.Password)
+            </p>
+
+            <p>
+                <label>
+                    Role</label>
+                <span class="field">
+                    @Html.DropDownListFor(model => model.IDRole, ((IEnumerable<aGrouponClasses.Models.tRole>)ViewBag.roleData).Select(option => new SelectListItem {
+                            Text = (option == null ? "None" : option.Name), 
+                            Value = option.IDRole.ToString(),
+                            Selected = (Model != null) && (option.IDRole == Model.IDRole)
+                        }), "Select Role...", new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.IDRole)
+            </p>
+            <p>
+                
+                    @Html.LabelFor(model => model.IDPartnerCategory)
+                <span class="field">
+                    @Html.DropDownListFor(model => model.IDPartnerCategory, ((IEnumerable<aGrouponClasses.Models.tCategory>)ViewBag.categoryData).Select(option => new SelectListItem {
+                            Text = (option == null ? "None" : option.Name), 
+                            Value = option.IDCategory.ToString(),
+                            Selected = (Model != null) && (option.IDCategory == Model.IDPartnerCategory)
+                        }), "Select Partner Category...", new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.IDPartnerCategory)
+            </p>
+
+             <p>
+                    @Html.LabelFor(model => model.IDCity)
+                <span class="field">
+                    @Html.DropDownListFor(model => model.IDCity, ((IEnumerable<aGrouponClasses.Models.tCategory>)ViewBag.cityData).Select(option => new SelectListItem {
+                            Text = (option == null ? "None" : option.Name), 
+                            Value = option.IDCategory.ToString(),
+                            Selected = (Model != null) && (option.IDCategory == Model.IDCity)
+                        }), "Select Partner City...", new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.IDCity)
+            </p>
+
+            <p>
+                @Html.LabelFor(model => model.Approved)
+                <span class="field">
+                    @Html.CheckBoxFor(model => model.Approved, new { @class = "longinput" })
+                </span>
+                @Html.ValidationMessageFor(model => model.Approved)
+            </p>

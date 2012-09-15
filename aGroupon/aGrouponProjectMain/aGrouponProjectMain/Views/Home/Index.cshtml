@@ -1,0 +1,31 @@
+﻿@model aGrouponClasses.Models.tDeal
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+
+                    @Html.Partial(@Url.Content("~/Views/Deal/DetailPartial.cshtml"), @Model)  
+
+
+                    <!-- BORDER-HORIZONTAL -->
+                    <div class="border-horizontal"></div>
+
+
+
+
+                    <!-- SPONZORI-LOGO -->
+                    <div class="sponzori-logo"></div>
+
+
+
+
+                    <!-- BORDER-HORIZONTAL -->
+                    <div class="border-horizontal"></div>
+
+
+                    @Html.Partial(@Url.Content("~/Views/Deal/DealsByCategoryPartial.cshtml"), (List<aGrouponClasses.Models.tDeal>)@ViewBag.DealsBySameCategory)  
+
+

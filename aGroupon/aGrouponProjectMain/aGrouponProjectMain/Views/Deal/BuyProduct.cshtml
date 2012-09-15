@@ -1,0 +1,21 @@
+﻿@model aGrouponProjectMain.Controllers.tDealBuyModel
+
+@{
+    ViewBag.Title = "BuyProduct";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>BuyProduct</h2>
+
+<fieldset>
+    <legend>tDealBuyModel</legend>
+
+    <div class="display-label">Quantity</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Quantity)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

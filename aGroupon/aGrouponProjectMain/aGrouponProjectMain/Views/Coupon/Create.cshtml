@@ -1,0 +1,129 @@
+﻿@model aGrouponClasses.Models.tCoupon
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CustomJS{
+    <script type="text/javascript" src="@Url.Content("~/adminTemplate/js/plugins/jquery.validate.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/CustomAdminFunctions.js")"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            var AddForm = jQuery("#add-form");
+            var submitBtn = jQuery("#btnSubmit");
+            MakeDatePicker( jQuery("#DateBegin") );
+            MakeDatePicker( jQuery("#DateEnd") );
+            ArrangeSubmitForm(AddForm, submitBtn);
+
+            jQuery('.notibar .close').click(function(){
+		        jQuery(this).parent().fadeOut(function(){
+			        jQuery(this).remove();
+		        });
+	        });
+        });
+
+        
+
+        function ArrangeSubmitForm(formToSubmit, submitBt) {
+            formToSubmit.submit(function (event) {
+                // Stop full page load
+                event.preventDefault();
+                if (ajaxValidate(formToSubmit, submitBt)) {
+                    var data = { IDPartner: jQuery('#lstPartner').val(),
+                        CouponValue: jQuery('#CouponValue').val(),
+                        DateBegin: jQuery('#DateBegin').val(),
+                        DateEnd: jQuery('#DateEnd').val(),
+                        Usable: jQuery('#Usable').attr("checked") == "checked",
+                        Code: jQuery('#Code').val(),
+                        Count: jQuery('#Count').val(),
+                    };
+                    var target = jQuery(this).attr('action');
+                    SubmitData(target, submitBt, data);
+                }
+            });
+        }      
+    </script>
+}
+
+<div class="pageheader">
+    <ul class="hornav">
+        <li class="current"><a href="#cats">Coupon Add Form</a></li>
+    </ul>
+</div>
+<!--pageheader-->
+<div id="contentwrapper" class="contentwrapper">
+    <div id="cats" class="subcontent">
+        @using (Html.BeginForm("CreateAjax", "Coupon", FormMethod.Post, new { id = "add-form", @class = "stdform stdform2" })) {
+            @Html.ValidationSummary(true)
+           
+           
+ <fieldset>
+                <p id="DescriptionDiv">
+                </p>
+            </fieldset>
+            
+            <p>
+                <label>
+                    Group</label>
+                <span class="field">
+                    @Html.DropDownListFor(model => model.IDPartner,
+                                new SelectList(ViewBag.userData, "IDUser", "UserName"), new { @class = "longinput required", @id = "lstPartner" })
+                </span>
+                @Html.ValidationMessageFor(model => model.IDPartner)
+            </p>
+
+                        
+            <p>
+                @Html.LabelFor(model => model.CouponValue)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.CouponValue, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.CouponValue)
+            </p>     
+                        
+            <p>
+                @Html.LabelFor(model => model.DateBegin)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.DateBegin, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.DateBegin)
+            </p>
+            
+            <p>
+                @Html.LabelFor(model => model.DateEnd)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.DateEnd, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.DateEnd)
+            </p>
+            
+            <p>
+                @Html.LabelFor(model => model.Code)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.Code, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.Code)
+            </p>    
+            
+             <p>
+                <label>Number Of Coupons</label>
+                <span class="field">
+                    <input class="longinput required" data-val="true" data-val-required="The DateEnd field is required." id="Count" name="Count" type="text" value="" />
+                </span>
+            </p>
+                        
+                        
+            <p class="stdformbutton">
+                <button class="submit radius2" id="btnSubmit">
+                    Create</button>
+                <input type="reset" class="reset radius2" value="Reset" />
+            </p>
+        }
+        <br />
+    </div>
+    <!-- #cities -->
+    <p>
+        @Html.ActionLink("Back to List", @Url.Content("~/AdminIndex"))
+    </p>
+</div>
+<!--contentwrapper-->

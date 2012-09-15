@@ -1,0 +1,40 @@
+﻿@model IEnumerable<aGrouponClasses.Models.tDeal>
+
+      
+                        @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i })) {
+
+                          @MvcHtmlHelpers.HtmlHelperExtensions.DivBegin(this.Html,item.Index)
+                            <div class="blog-small">
+                                <div class="title-blog-small"><a href="@Url.Action("Details", "Deal", new { id = item.Data.IDDeal })">@item.Data.DealTitle</a></div><!--/title-blog-small-->
+                                <div class="images-small">
+                                    <a href="@Url.Action("Details", "Deal", new { id = item.Data.IDDeal })"><img src="@Url.Content("~/Images/Deal/" + item.Data.ProductImage)" alt="images" title="images" style="opacity: 1; "></a>
+                                    <div class="statistic">
+                                        <ul>
+                                            <li>Deal Value<p>@String.Format("{0:##.##,##} som", item.Data.MarketPrice)</p></li>
+                                            <li class="statistic-border"></li>
+                                            <li>Discount<p>@aGrouponClasses.Utils.tDealUtils.DiscountStr(item.Data)</p></li>
+                                            <li class="statistic-border"></li>
+                                            <li>You Save<p>@String.Format("{0:##.##,##} som", item.Data.MarketPrice - item.Data.DealPrice)</p></li>
+                                        </ul>
+                                    </div><!--statistic-->
+                                </div><!--/images-small-->
+                                <div class="blog-small-button">
+                                    <p>  @aGrouponClasses.Utils.tDealUtils.GetLeftTSStrForDeal(item.Data)</p>
+                                    <div class="small-button">
+                                        <a href="@Url.Action("Details", "Deal", new { id = item.Data.IDDeal })">
+                                            <div class="button">
+                                                <div class="small-left"></div>
+                                                <div class="small-center">SEE DEAL</div>
+                                                <div class="small-right"></div>
+                                            </div>
+                                        </a><!--/button-->
+                                    </div><!--/small-button-->
+                                </div><!--/blog-small-button-->
+                            </div><!--/blog-small-->
+
+                            <div class="border-vertical"></div>
+                            @MvcHtmlHelpers.HtmlHelperExtensions.DivEnd(this.Html, item.Index)
+                        }
+
+                        
+

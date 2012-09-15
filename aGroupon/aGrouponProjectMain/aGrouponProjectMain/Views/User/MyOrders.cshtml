@@ -1,0 +1,62 @@
+﻿@model IEnumerable<aGrouponClasses.Models.tOrder>
+@{
+    ViewBag.Title = "MyOrders";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<div class="blog-home">
+    <div class="blog-left">
+        <div class="single-deals-title">
+            My Orders</div>
+        <!--/title-blog-->
+        <div class="single-deals-text">
+            <table width="100%">
+                <tr>
+                    <th>
+                        Deal
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        State
+                    </th>
+                    <th>
+                        Operation
+                    </th>
+                </tr>
+                @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tDeal.DealTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tDeal.DealPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                        <td>
+                            @{decimal Total = item.Quantity * item.tDeal.DealPrice;}
+                            @Total
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderStatus)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Details","OrderDetails",new { IDOrder = item.IDOrder})
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <!--/text-->
+    </div>
+    <!--/blog-left-->
+</div>
+<!--blog-home-->

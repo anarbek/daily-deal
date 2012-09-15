@@ -1,0 +1,124 @@
+﻿@model aGrouponProjectMain.Controllers.tDealAdminModel
+
+@{
+    ViewBag.Title = "AdminIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CustomJS{
+    <script type="text/javascript" src="@Url.Content("~/adminTemplate/js/plugins/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/adminTemplate/js/plugins/jquery.uniform.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/CustomAdminFunctions.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/CustomAdminListFunctions.js")"></script>
+    <script type="text/javascript">
+        var couponsUsable;
+        jQuery(document).ready(function () {
+            couponsUsable = jQuery('#couponsUsable')
+            .dataTable({
+                "bProcessing": true,
+                "bServerSide": true,
+                "sAjaxSource": "/Deal/GetDealJSonByDealStatus?DealStatus=" + @Model.DealStatus,
+                "aoColumns": [
+                                { "mDataProp": "chkCheck" },
+                                { "mDataProp": "ID" },
+                                { "mDataProp": "Title" },
+                                { "mDataProp": "Category" },
+                                { "mDataProp": "Price" },
+                                { "mDataProp": "lnkDelete" },
+                            ],
+                "sPaginationType": "full_numbers",
+                "aaSortingFixed": [[0, 'asc']],
+                "fnDrawCallback": function (oSettings) {
+                    jQuery('input:checkbox,input:radio').uniform();
+                    //jQuery.uniform.update();
+                },
+                "fnInitComplete": function(oSettings, json) {
+                     /* Add a select menu for each TH element in the table footer */
+                    jQuery("tfoot th").each(function (i) {
+                        if (jQuery(this).attr('name') == 'Filterable') {
+                            var colData = couponsUsable.fnGetColumnData(i);
+                            console.log("coldata:"  + colData);
+                            this.innerHTML = fnCreateSelect(colData);
+                            jQuery('select', this).change(function () {
+                                couponsUsable.fnFilter(jQuery(this).val(), i);
+                            });
+                        }
+                    });
+
+                    jQuery('.stdtablecb .checkall').click(function () {
+                        var parentTable = jQuery(this).parents('table');
+                        var ch = parentTable.find('tbody input[type=checkbox]');
+                        if (jQuery(this).is(':checked')) {
+
+                            //check all rows in table
+                            ch.each(function () {
+                                jQuery(this).attr('checked', true);
+                                jQuery(this).parent().addClass('checked'); //used for the custom checkbox style
+                                jQuery(this).parents('tr').addClass('selected');
+                            });
+
+                            //check both table header and footer
+                            parentTable.find('.checkall').each(function () { jQuery(this).attr('checked', true); });
+
+                        } else {
+
+                            //uncheck all rows in table
+                            ch.each(function () {
+                                jQuery(this).attr('checked', false);
+                                jQuery(this).parent().removeClass('checked'); //used for the custom checkbox style
+                                jQuery(this).parents('tr').removeClass('selected');
+                            });
+
+                            //uncheck both table header and footer
+                            parentTable.find('.checkall').each(function () { jQuery(this).attr('checked', false); });
+                        }
+                    });
+
+
+                   ///// PERFORMS CHECK/UNCHECK BOX /////
+                    jQuery('.stdtablecb tbody input[type=checkbox]').click(function () {
+                        if (jQuery(this).is(':checked')) {
+                            jQuery(this).parents('tr').addClass('selected');
+                            jQuery(this).attr('checked', true);
+                        } else {
+                            jQuery(this).parents('tr').removeClass('selected');
+                            jQuery(this).attr('checked',false);
+                        }
+                    });
+
+                }   
+            });
+        });
+
+        function MakeTablePageable(objTable) {
+            objTable.dataTable({
+                "sPaginationType": "full_numbers",
+                "aaSortingFixed": [[0, 'asc']],
+                "fnDrawCallback": function (oSettings) {
+                    jQuery('input:checkbox,input:radio').uniform();
+                    //jQuery.uniform.update();
+                }
+            });
+        }
+
+        
+    </script>
+}
+
+<div class="pageheader">
+            <h1 class="pagetitle">@Model.DealStatus Coupons</h1>
+            <span class="pagedesc">Manage @Model.DealStatus Coupons Here</span>
+            
+            <ul class="hornav">
+                <li class="current"><a href="#Coupons">Coupon List</a></li>
+            </ul>
+        </div><!--pageheader-->
+        
+        <div id="contentwrapper" class="contentwrapper">
+        	<div id="Coupons" class="subcontent">
+                <p id="DescriptionDiv"></p>
+                @Html.Partial("_DealListPartial") 
+            </div><!-- #cities -->
+
+            
+        
+        </div><!--contentwrapper-->

@@ -1,0 +1,12 @@
+﻿@model aGrouponClasses.Models.tContent
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<div class="content-others left">
+@Html.Partial("ContentsByCategoryMenu", (List<aGrouponClasses.Models.tContent>)@ViewBag.OtherContent)
+<h2> @Html.DisplayFor(model=>model.Name)</h2>  
+<p>
+     @Html.Raw(Model.Description)
+</p>
+ </div>

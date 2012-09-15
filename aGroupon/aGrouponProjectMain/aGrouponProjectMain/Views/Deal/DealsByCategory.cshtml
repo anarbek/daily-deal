@@ -1,0 +1,13 @@
+﻿@model aGrouponProjectMain.Controllers.tDealFrontEndModel
+
+@{
+    ViewBag.Title = "About Us";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<div class="content-others left">
+    @{Html.RenderAction("DealsByCityTabbedMenu", "Group");}
+            <h1> @Model.currentCat.Name</h1>
+                @Html.Partial("DealsByCategoryPartial",@Model.currentDeals)                         
+    </div>

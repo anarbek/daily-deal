@@ -1,0 +1,73 @@
+﻿@model aGrouponProjectMain.Controllers.tDealBuyModel
+
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+
+<!-- BLOG -->
+@using (Html.BeginForm("MakePayment", "Deal", FormMethod.Post, new { id = "add-form", @class = "stdform stdform2" })) {
+@Html.ValidationSummary("Please correct these errors: ")
+    <div class="blog-home">
+        <div class="blog-left">
+            <div class="single-deals-title">
+                Submit Order</div>
+            <!--/title-blog-->
+            <div class="single-deals-text">
+                <table width="100%">
+                    <tr>
+                        <td style="text-align: left">
+                            Deal
+                        </td>
+                        <td style="text-align: left">
+                            Quantity
+                        </td>
+                        <td style="text-align: left">
+                            Price
+                        </td>
+                        <td style="text-align: left">
+                            Total
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left">@Html.DisplayFor(model => model.currentDeal.DealTitle)
+                        </td>
+                        <td style="text-align: left">@Html.DisplayFor(model => model.Quantity)   @Html.ValidationMessageFor(model => model.Quantity)
+                        </td>
+                        <td style="text-align: left">@Html.DisplayFor(model => model.currentDeal.DealPrice)
+                        </td>
+                        <td style="text-align: left">@Html.DisplayFor(model => model.currentDeal.DealPrice)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" style="text-align: left">
+                            Total Amount Of Order
+                        </td>
+                        <td style="text-align: left">@Html.DisplayFor(model => model.currentDeal.DealPrice)
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td style="text-align: left">
+                            Order Notes:
+                        </td>
+                        <td colspan="3" style="text-align: left">@Html.TextAreaFor(model => model.OrderNotes, new { cols = "35", rows = "3" })@Html.ValidationMessageFor(model => model.OrderNotes)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: left" colspan="4">
+                           <button type="submit">Make Payment</button>
+                        </td>
+                    </tr>
+                </table>
+                 @Html.HiddenFor(model => model.IDDeal)
+                 @Html.HiddenFor(model => model.Quantity)
+            </div>
+            <!--/text-->
+        </div>
+        <!--/blog-left-->
+    </div>
+    <!--blog-home-->
+}
+

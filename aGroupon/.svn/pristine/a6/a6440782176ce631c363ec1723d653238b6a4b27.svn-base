@@ -1,0 +1,87 @@
+﻿  <!------ FOOTER ------>
+    <div class="footer">
+        <div class="wrapper">
+            <div class="footer-background">
+                <div class="footer-wripper">
+
+
+
+                    <!--TEXT WIDGET-->
+                    <div class="footer_box">
+                        <h3>About Our Brand</h3>
+                        <div class="textwidget">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+                        </div><!--text-widget-->
+                    </div><!--/footer_box -->
+
+
+
+
+                    <div class="border-vertical"></div>
+
+
+
+                    <!--TWITTER WIDGET-->
+                    <div class="footer_box">
+                        <h3>Twitter Buzz</h3>
+                        <ul class="twitter_ul">
+                            <li>
+                                <div class="box-twitter-center">
+                                    <span>7 Photoshop tips for designing clean and modern websites</span>
+                                    <a href="#">
+                                    <div class="twittime">su.pr/1ruOpp</div></a>
+                                </div>
+                                <div class="twitter-links-t"><span>1Day Ago</span></div>
+                            </li>
+                            <li>
+                                <div class="box-twitter-center">
+                                    <span>7 Photoshop tips for designing clean and modern websites</span>
+                                    <a href="#" style="font-size:85%">
+                                    <div class="twittime">su.pr/1ruOpp</div></a>
+                                </div>
+                                <div class="twitter-links-t"><span>1Day Ago</span></div>
+                            </li>
+                        </ul>
+                    </div><!--/footer_box-->
+
+
+
+                    <div class="border-vertical"></div>
+
+
+
+                    <!--CUSTOM MENU-->
+                    <div class="footer_box">
+                        <h3 class="sidebar_widgettitle">Other Pages</h3>
+
+                        <div class="menu-menu-container">
+                            <ul class="menu">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">About Our Deals</a></li>
+                                <li><a href="#">All Deals</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div><!--footer_box-->
+
+
+
+
+                </div><!--content-wripper-->
+            </div><!--footer-background-->
+
+
+
+            <!--FOOTER-COPY-->
+            <div class="footer-copy">
+                <div class="copy-text">
+                    Copyright Information Goes Here 2010. All Rights Reserved.<br />
+                    Designed by  <a href="#">Themesaholic</a>
+                </div><!--copy-text-->
+            </div><!--footer-copy-->
+
+
+
+        </div><!--/wrapper-->
+    </div><!--/footer-->

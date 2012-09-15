@@ -1,0 +1,93 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using aGrouponClasses.Repositories;
+using aGrouponClasses.Models;
+
+namespace aGrouponProjectMain.Controllers
+{
+    public class ContentController : Controller
+    {
+        private IContentRepository _contentRepository;
+        public ContentController(IContentRepository contentRepository) {
+            _contentRepository = contentRepository;
+        }
+
+        public ContentController()
+            : this(new ContentRepositoryEF()) {
+        }
+
+        [Authorize(Roles="admin")]
+        public ActionResult AdminIndex()
+        {
+            IQueryable contentList = _contentRepository.All;
+            return View(contentList);
+        }
+
+        [Authorize(Roles = "admin")]
+        public ActionResult Create() {
+            return View();
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost]
+        [ValidateInput(false)]
+        public JsonResult Create(tContent contentData) {
+            if (ModelState.IsValid)
+            {
+                contentData.DateAdded = DateTime.Now;
+                _contentRepository.InsertOrUpdate(contentData);
+                _contentRepository.Save();
+                return Json(new {
+                    objectAddedName = contentData.Name,
+                    valid = true,
+                    Message = "Content was added Succesfully"
+                });
+            } else {
+                return Json(new {
+                    objectAddedName = "",
+                    valid = false,
+                    Message = "Fill All Fields please"
+                });
+            }
+        }
+
+        public ActionResult Edit(int id) {
+            tContent currentCat = _contentRepository.Find(id);
+            return View(currentCat);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public JsonResult DeleteContent(int id) {
+            _contentRepository.Delete(id);
+            _contentRepository.Save();
+            return Json(new {
+                valid = true,
+                Message = "Content was deleted Succesfully",
+                redirect = "/Content/AdminIndex"
+            });
+        }
+
+        [ChildActionOnly]
+        public ActionResult GetContentForMainSitePartial(string Code)
+        {
+            tContent contentData = _contentRepository.FindByCode(Code);
+            if(contentData == null)
+            {
+                contentData = new tContent {Name = "Not Found", Description = "Not Found"};
+            }
+            return PartialView(contentData);
+        }
+
+        public ActionResult ContentDetails(int id) {
+            tContent contentData = _contentRepository.Find(id);
+            if (contentData == null) {
+                contentData = new tContent { Name = "Not Found", Description = "Not Found" };
+            }
+            return View(contentData);
+        }
+    }
+}

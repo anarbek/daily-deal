@@ -1,0 +1,125 @@
+﻿@model aGrouponClasses.Models.tDeal
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJS{
+    <script type="text/javascript" src="@Url.Content("~/adminTemplate/js/plugins/jquery.validate.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/CustomAdminFunctions.js")"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            jQuery('select, input:checkbox').uniform();
+            jQuery('input:file').uniform();
+            MakeDatePicker(jQuery("#DateStarting"));
+            MakeDatePicker(jQuery("#DateEnding"));
+            MakeDatePicker(jQuery("#DateCouponExpiry"));
+
+            var AddForm = jQuery("#add-form");
+            var submitBtn = jQuery("#btnSubmit");
+            ArrangeSubmitForm(AddForm, submitBtn);
+            ArrangeDeleteData();
+
+            jQuery('input[type=checkbox]').click(function () {
+                if (jQuery(this).is(':checked')) {
+                    jQuery(this).attr('checked', true);
+                } else {
+                    jQuery(this).attr('checked', false);
+                }
+            });
+        });
+
+        function ArrangeSubmitForm(formToSubmit, submitBt) {
+            formToSubmit.submit(function (event) {
+                // Stop full page load
+                //event.preventDefault();
+                if (ajaxValidate(formToSubmit, submitBt)) {
+                    var chks = jQuery('input[name="chkCity"]');
+                    var arr = new Array();
+                    for (var i = 0; i < chks.length; i++) {
+                        if (jQuery(chks[i]).attr('checked') == 'checked') {
+                            var currentID = jQuery(chks[i]).attr('id');
+                            console.log("id=" + currentID);
+                            arr.push(currentID);
+                        }
+                    }
+                    jQuery("#HelperString").val(arr);
+//                    var FormData = jQuery("#add-form").serialize();
+//                    var data = { dealData: FormData };
+//                    var target = jQuery(this).attr('action');
+                    //SubmitData(target, submitBt, JSON.stringify(data));
+                }
+            });
+        }
+
+        function ArrangeDeleteData() {
+            jQuery("#btnDelete").click(function () {
+                Delete("/Deal/DeleteDeal", jQuery("#IDDeal").val());
+            });
+        }
+
+        function GetSelectedCities() {
+            var chks = jQuery('input[name="chkCity"]');
+            var arr = [];
+            chks.each(function (i) {
+                if (jQuery(chks[i]).attr('checked') == 'checked') {
+                    var currentID = jQuery(chks[i]).attr('id');
+                    console.log("id=" + currentID);
+                    arr.push();
+                }
+            });
+            return arr;
+        }
+
+        function UploadImage() {
+            jQuery("#add-form").submit();
+        }
+
+        function UploadImage_Complete() {
+            var newImg = jQuery.parseJSON(jQuery("#UploadTarget").contents().find("#jsonResult")[0].innerHTML);
+
+            //If there was an error, display it to the user
+            if (newImg.valid == false) {
+                jQuery("#DescriptionDiv").html(newImg.Message);
+                return;
+            }
+            jQuery("#DescriptionDiv").html(newImg.Message);
+        }
+
+    </script>
+}
+
+<div class="pageheader">
+    <ul class="hornav">
+        <li class="current"><a href="#cats">User Edit Form</a></li>
+    </ul>
+</div>
+<!--pageheader-->
+<div id="contentwrapper" class="contentwrapper">
+    <div id="cats" class="subcontent">
+        @using (Html.BeginForm("EditAjax", "Deal", FormMethod.Post, new {enctype = "multipart/form-data", target="UploadTarget", id = "add-form", @class = "stdform stdform2" })) {
+            @Html.ValidationSummary(true)
+           
+            @Html.Partial("_CreateOrEdit", Model)
+            @Html.HiddenFor(model => model.IDDeal)  
+            @Html.HiddenFor(model => model.HelperString) 
+             @Html.Partial("DealCities", Model)          
+            <p class="stdformbutton">
+                <button class="submit radius2" id="btnSubmit" onclick="UploadImage()">
+                    Update Deal</button>
+                <button class="submit radius2" id="btnDelete">
+                    Delete Deal</button>
+                <input type="reset" class="reset radius2" value="Reset Form" />
+            </p>
+        }
+      <iframe id="UploadTarget" name="UploadTarget" onload="UploadImage_Complete();" style="position: absolute; left: -999em; top: -999em;"></iframe>
+        <div id="Images"></div>
+        <br />
+    </div>
+    <!-- #cities -->
+     <p>
+        @Html.ActionLink("Back to List", @Url.Content("~/AdminIndex"))
+    </p>
+</div>
+<!--contentwrapper-->

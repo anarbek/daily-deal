@@ -1,0 +1,280 @@
+﻿@model aGrouponClasses.Models.tDeal
+
+ 
+            <fieldset>
+                <p id="DescriptionDiv">
+                </p>
+            </fieldset>
+            <p>
+                <label for="IDDealType">
+                    Deal Type</label>
+                <span class="field">
+                    <select name="IDDealType" id="IDDealType">
+                        <option value="1">Deal</option>
+                        <option value="2">Seconds</option>
+                        <option value="3">Goods</option>
+                    </select></span>
+            </p>
+            <p>
+                <label>
+                    Group</label>
+                <span class="field">
+                    @Html.DropDownListFor(model => model.IDGroup, ((IEnumerable<aGrouponClasses.Models.tGroup>)ViewBag.groupData).Select(option => new SelectListItem {
+                   Text = (option == null ? "None" : option.Name),
+                   Value = option.IDGroup.ToString(),
+                   Selected = (Model != null) && (option.IDGroup == Model.IDGroup)
+               }), "Select Group...", new { @class = "required", @title = "Please select a group!" })
+                </span>
+                @Html.ValidationMessageFor(model => model.IDGroup)
+            </p>
+            <p>
+                <label>
+                    Category</label>
+                <span class="field">
+                    @Html.DropDownListFor(model => model.IDDealCategory, ((IEnumerable<aGrouponClasses.Models.tCategory>)ViewBag.categoryData).Select(option => new SelectListItem {
+                   Text = (option == null ? "None" : option.Name),
+                   Value = option.IDCategory.ToString(),
+                   Selected = (Model != null) && (option.IDCategory == Model.IDDealCategory)
+               }), "Select Category...", new { @class = "required", @title = "Please select a category!" })
+                </span>
+                @Html.ValidationMessageFor(model => model.IDDealCategory)
+            </p>
+            <p>
+                @Html.LabelFor(model => model.IDPartner)
+                <span class="field">
+                    @Html.DropDownListFor(model => model.IDPartner, ((IEnumerable<aGrouponClasses.Models.tUser>)ViewBag.userData).Select(
+                    option => new SelectListItem {
+                   Text = (option == null ? "None" : option.UserName),
+                   Value = option.IDUser.ToString(),
+                   Selected = (Model != null) && (option.IDUser == Model.IDPartner)
+                    }), "Select Partner...", new { @class = "required", @title = "Please select a partner!" })
+                </span>
+                @Html.ValidationMessageFor(model => model.IDPartner)
+            </p>
+            <p>
+                @Html.LabelFor(model => model.DealTitle)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.DealTitle, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.DealTitle)
+            </p>    
+            <p>
+                @Html.LabelFor(model => model.MarketPrice)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.MarketPrice, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.MarketPrice)
+            </p>   
+            
+            <p>
+                @Html.LabelFor(model => model.DealPrice)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.DealPrice, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.DealPrice)
+            </p> 
+            
+            <p>
+                @Html.LabelFor(model => model.VirtualBuyers)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.VirtualBuyers, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.VirtualBuyers)
+            </p> 
+            
+            <p>
+                @Html.LabelFor(model => model.LimitLower)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.LimitLower, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.LimitLower)
+            </p> 
+            
+             <p>
+                @Html.LabelFor(model => model.LimitUpper)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.LimitUpper, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.LimitUpper)
+            </p> 
+            
+             <p>
+                @Html.LabelFor(model => model.LimitUser)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.LimitUser, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.LimitUser)
+            </p> 
+           
+           <p>
+                @Html.LabelFor(model => model.QuantityMinimum)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.QuantityMinimum, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.QuantityMinimum)
+            </p> 
+            
+            <p>
+                @Html.LabelFor(model => model.DateStarting)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.DateStarting, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.DateStarting)
+            </p> 
+           
+             <p>
+                @Html.LabelFor(model => model.DateEnding)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.DateEnding, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.DateEnding)
+            </p> 
+            
+            <p>
+                @Html.LabelFor(model => model.DateCouponExpiry)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.DateCouponExpiry, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.DateCouponExpiry)
+            </p> 
+            
+            <p>
+                @Html.LabelFor(model => model.AllowRefundFlag)
+                <span class="field">
+                    @Html.CheckBoxFor(model => model.AllowRefundFlag, new { @class = "width100" })
+                </span>
+                @Html.ValidationMessageFor(model => model.AllowRefundFlag)
+            </p> 
+            
+           <p>
+                <span class="field">@Html.LabelFor(model => model.Introduction)
+                    @Html.TextAreaFor(model => model.Introduction, new { @class = "longinput",@cols=80,@rows=5 })
+                </span>
+                @Html.ValidationMessageFor(model => model.Introduction)
+            </p> 
+            
+            <p>
+                <span class="field">@Html.LabelFor(model => model.Tips)
+                    @Html.TextAreaFor(model => model.Tips, new { @class = "longinput", @cols = 80, @rows = 5 })
+                </span>
+                @Html.ValidationMessageFor(model => model.Tips)
+            </p> 
+           
+            <p>
+                @Html.LabelFor(model => model.SortOrder)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.SortOrder, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.SortOrder)
+            </p> 
+             <p>
+                @Html.LabelFor(model => model.BiggestCardUse)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.BiggestCardUse, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.BiggestCardUse)
+            </p> 
+            <p>
+                @Html.LabelFor(model => model.InvitationRebate)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.InvitationRebate, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.InvitationRebate)
+            </p> 
+           <p>
+                @Html.LabelFor(model => model.PrductName)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.PrductName, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.PrductName)
+            </p> 
+          <p>
+                @Html.LabelFor(model => model.ProductOptions)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.ProductOptions, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.ProductOptions)
+            </p> 
+            
+            <p>
+                @Html.LabelFor(model => model.ProductImage)
+                <span class="field">
+                    <div class="photoupload">
+                        <div class="uploader" id="uniform-undefined" style="">
+                            <input type="file" id="ProductImage" name="ProductImage" size="19" style="opacity: 0; " />
+                            <span class="filename">No file selected</span>
+                            <span class="action">Choose File</span>
+                        </div>
+                    </div>
+                </span>
+                @Html.ValidationMessageFor(model => model.ProductImage)
+            </p> 
+            
+            <p>
+                @Html.LabelFor(model => model.ProductImage1)
+                <span class="field">
+                    <div class="photoupload">
+                        <div class="uploader" id="uniform-undefined" style="">
+                            <input type="file" id="ProductImage1" name="ProductImage1" size="19" style="opacity: 0; " />
+                            <span class="filename">No file selected</span>
+                            <span class="action">Choose File</span>
+                        </div>
+                    </div>
+                </span>
+                @Html.ValidationMessageFor(model => model.ProductImage1)
+            </p> 
+            
+            <p>
+                @Html.LabelFor(model => model.ProductImage2)
+                <span class="field">
+                    <div class="photoupload">
+                        <div class="uploader" id="uniform-undefined" style="">
+                            <input type="file" id="ProductImage2" name="ProductImage2" size="19" style="opacity: 0; " />
+                            <span class="filename">No file selected</span>
+                            <span class="action">Choose File</span>
+                        </div>
+                    </div>
+                </span>
+                @Html.ValidationMessageFor(model => model.ProductImage2)
+            </p> 
+            
+            <p>
+                @Html.LabelFor(model => model.FlvVideoFile)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.FlvVideoFile, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.FlvVideoFile)
+            </p> 
+            
+            <p>
+                <span class="field">@Html.LabelFor(model => model.Detail)
+                    @Html.TextAreaFor(model => model.Detail, new { @class = "longinput", @cols = 80, @rows = 5 })
+                </span>
+                @Html.ValidationMessageFor(model => model.Detail)
+            </p> 
+            <p>
+                <span class="field">@Html.LabelFor(model => model.UserReviews)
+                    @Html.TextAreaFor(model => model.UserReviews, new { @class = "longinput", @cols = 80, @rows = 5 })
+                </span>
+                @Html.ValidationMessageFor(model => model.UserReviews)
+            </p> 
+            <p>
+                @Html.LabelFor(model => model.ModeOfDelivery)
+                <span class="field">
+                    <select name="ModeOfDelivery" id="ModeOfDelivery">
+                        <option value="1">Coupon</option>
+                        <option value="2">VoucherCode</option>
+                        <option value="3">Self Pickup</option>
+                        <option value="4">Express Delivery</option>
+                    </select></span>
+            </p>
+            
+            
+             <p>
+                @Html.LabelFor(model => model.ConsumerRebates)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.ConsumerRebates, new { @class = "width100 required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.ConsumerRebates)
+            </p> 
+            

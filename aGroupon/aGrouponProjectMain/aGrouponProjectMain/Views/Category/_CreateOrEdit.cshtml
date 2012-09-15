@@ -1,0 +1,57 @@
+﻿@model aGrouponClasses.Models.tCategory
+
+ <fieldset>
+                <p id="DescriptionDiv">
+                </p>
+            </fieldset>
+
+ <p>
+                @Html.LabelFor(model => model.Name)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.Name)
+            </p>
+                        
+            <p>
+                @Html.LabelFor(model => model.Slug)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.Slug, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.Slug)
+            </p>
+                        
+            <p>
+                @Html.LabelFor(model => model.InitialLetter)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.InitialLetter, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.InitialLetter)
+            </p>
+                        
+                        
+            <p>
+                @Html.LabelFor(model => model.Sort)
+                <span class="field">
+                    @Html.TextBoxFor(model => model.Sort, new { @class = "longinput required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.Sort)
+            </p>
+                        
+            <p>
+                <label>
+                    Group</label>
+                <span class="field">
+                    @Html.DropDownListFor(model => model.IDGroup,
+                                      new SelectList(ViewBag.groupData, "IDGroup", "Name"), new { @class = "longinput required" ,@id="lstGroup" })
+                </span>
+                @Html.ValidationMessageFor(model => model.IDGroup)
+            </p>
+                        
+            <p>
+                @Html.LabelFor(model => model.DisplayFlag)
+                <span class="field">
+                    @Html.CheckBoxFor(model => model.DisplayFlag)
+                </span>
+                @Html.ValidationMessageFor(model => model.DisplayFlag)
+            </p>

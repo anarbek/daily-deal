@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using aGrouponClasses.Models;
+
+namespace aGrouponProjectMain.Controllers {
+    public class CommonUtils
+    {
+        public static CommonUtils Instance = new CommonUtils();
+        private tCategory _selectedCity;
+        public tCategory SelectedCity {
+            get {
+                if (_selectedCity == null)
+                    _selectedCity = new tCategory();
+                return _selectedCity;
+            }
+            set { _selectedCity = value; }
+        }
+        public tShoppingCart ShoppingCart { get; set; }
+        
+    }
+    public class tShoppingCart
+    {
+        public int IDDeal { get; set; }
+        public int Quantity { get; set; }
+        public string BuyerNotes { get; set; }
+        public string OrderNotes { get; set; }
+        public string MobilePhone { get; set; }
+    }
+
+    public class UserInfo
+    {
+        public string UserName { get; set; }
+        public string NameSurname { get; set; }
+        public tCategory CurrentSelectedCity { get; set; }
+    }
+}

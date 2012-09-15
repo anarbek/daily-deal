@@ -1,0 +1,69 @@
+﻿@model aGrouponClasses.Models.tUser
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJS{
+    <script type="text/javascript" src="@Url.Content("~/adminTemplate/js/plugins/jquery.validate.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/CustomAdminFunctions.js")"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            var AddForm = jQuery("#add-form");
+            var submitBtn = jQuery("#btnSubmit");
+            ArrangeSubmitForm(AddForm, submitBtn);
+            ArrangeDeleteData();
+        });
+
+        function ArrangeSubmitForm(formToSubmit, submitBt) {
+            formToSubmit.submit(function (event) {
+                // Stop full page load
+                event.preventDefault();
+                if (ajaxValidate(formToSubmit, submitBt)) {
+                    var data = jQuery("#add-form").serialize();
+                    var target = jQuery(this).attr('action');
+                    SubmitData(target, submitBt, data);
+                }
+            });
+        }
+
+        function ArrangeDeleteData() {
+            jQuery("#btnDelete").click(function () {
+                Delete("/User/DeleteUser", jQuery("#IDUser").val());
+            });
+        }
+   
+    </script>
+}
+
+<div class="pageheader">
+    <ul class="hornav">
+        <li class="current"><a href="#cats">User Edit Form</a></li>
+    </ul>
+</div>
+<!--pageheader-->
+<div id="contentwrapper" class="contentwrapper">
+    <div id="cats" class="subcontent">
+        @using (Html.BeginForm("EditAjax", "User", FormMethod.Post, new { id = "add-form", @class = "stdform stdform2" })) {
+            @Html.ValidationSummary(true)
+           
+            @Html.Partial("_CreateOrEdit", Model)
+            @Html.HiddenFor(model => model.IDUser)
+                        
+            <p class="stdformbutton">
+                <button class="submit radius2" id="btnSubmit">
+                    Update User</button>
+                <button class="submit radius2" id="btnDelete">
+                    Delete User</button>
+                <input type="reset" class="reset radius2" value="Reset Button" />
+            </p>
+        }
+        <br />
+    </div>
+    <!-- #cities -->
+     <p>
+        @Html.ActionLink("Back to List", @Url.Content("~/AdminIndex"))
+    </p>
+</div>
+<!--contentwrapper-->

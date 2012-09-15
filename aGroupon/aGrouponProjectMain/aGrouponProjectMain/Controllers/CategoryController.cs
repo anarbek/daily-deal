@@ -1,0 +1,246 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using aGrouponClasses.Models;
+using aGrouponClasses.Repositories;
+using aGrouponClasses.Utils;
+using B2B.BLL;
+
+namespace aGrouponProjectMain.Controllers {
+    public class CategoryController : Controller {
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IGroupRepository _groupRepository;
+
+        public CategoryController()
+            : this(new CategoryRepositoryEF(), new GroupRepositoryEF()) {
+        }
+
+        public CategoryController(ICategoryRepository categoryRepository, IGroupRepository groupRepository) {
+            this._categoryRepository = categoryRepository;
+            this._groupRepository = groupRepository;
+        }
+
+        public ActionResult AdminIndex() {
+            CategoryAdminIndexModel catModel = new CategoryAdminIndexModel();
+            catModel.Cities = new tCategoryModelCustom {
+                IDCategoryType = (int)Enums.enmCategoryTypes.City,
+                InnerCategories =
+                    _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.City)
+            };
+            catModel.ForumCategories = new tCategoryModelCustom {
+                IDCategoryType = (int)Enums.enmCategoryTypes.ForumCategory,
+                InnerCategories =
+                    _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.ForumCategory)
+            };
+            catModel.DealCategories = new tCategoryModelCustom {
+                IDCategoryType = (int)Enums.enmCategoryTypes.DealCategory,
+                InnerCategories =
+                    _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.DealCategory)
+            };
+            catModel.PartnerCategories = new tCategoryModelCustom {
+                IDCategoryType = (int)Enums.enmCategoryTypes.PartnersCategory,
+                InnerCategories =
+                    _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.PartnersCategory)
+            };
+            catModel.UserGrades = new tCategoryModelCustom {
+                IDCategoryType = (int)Enums.enmCategoryTypes.UserGrade,
+                InnerCategories =
+                    _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.UserGrade)
+            };
+            catModel.ContentCategories = new tCategoryModelCustom {
+                IDCategoryType = (int)Enums.enmCategoryTypes.Content,
+                InnerCategories =
+                    _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.Content)
+            };
+            return View(catModel);
+        }
+
+        public ActionResult CategoriesByIDCategoryType(int idGroup) {
+            List<tCategory> cats = _categoryRepository.GetListByIDCategoryType(idGroup);
+            return View(cats);
+        }
+
+        //
+        // GET: /Category/
+        public ActionResult Index() {
+            return View();
+        }
+
+        //
+        // GET: /Category/Details/5
+
+        public ActionResult Details(int id) {
+            return View();
+        }
+
+        //
+        // GET: /Category/Create
+         [Authorize(Roles = "Admin")]
+        public ActionResult Create(int IDCategoryType) {
+            //List<tGroup> = 
+            List<tGroup> groupData = _groupRepository.All.ToList();
+            ViewBag.groupData = groupData;
+            ViewBag.IDCategoryType = IDCategoryType;
+            return View();
+        }
+
+        //
+        // POST: /Category/Create
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult Create(FormCollection collection) {
+            try {
+                // TODO: Add insert logic here
+
+                return RedirectToAction("Index");
+            } catch {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public JsonResult CreateAjax(tCategory city) {
+            if (ModelState.IsValid) {
+                _categoryRepository.InsertOrUpdate(city);
+                return Json(new {
+                    objectAddedName = city.Name,
+                    valid = true,
+                    Message = "Category was added Succesfully"
+                });
+            } else
+            {
+                return Json(new
+                                {
+                                    objectAddedName = "",
+                                    valid = false,
+                                    Message = "Fill All Fields please"
+                });
+            }
+        }
+
+        //
+        // GET: /Category/Edit/5
+
+        public ActionResult Edit(int id) {
+            List<tGroup> groupData = _groupRepository.All.ToList();
+            ViewBag.groupData = groupData;
+            tCategory currentCat = _categoryRepository.Find(id);
+            return View(currentCat);
+        }
+
+        //
+        // POST: /Category/Edit/5
+
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection) {
+            try {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            } catch {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public JsonResult EditAjax(tCategory city) {
+            if (ModelState.IsValid) {
+                _categoryRepository.InsertOrUpdate(city);
+                return Json(new {
+                    objectAddedName = city.Name,
+                    valid = true,
+                    Message = "Category was updated Succesfully"
+                });
+            } else {
+                return Json(new {
+                    objectAddedName = "",
+                    valid = false,
+                    Message = "Fill All Fields please"
+                });
+            }
+        }
+
+        //
+        // GET: /Category/Delete/5
+
+        public ActionResult Delete(int id) {
+            return View();
+        }
+
+        //
+        // POST: /Category/Delete/5
+
+        [HttpPost]
+        public ActionResult Delete(int id, FormCollection collection) {
+            try {
+                // TODO: Add delete logic here
+
+                return RedirectToAction("Index");
+            } catch {
+                return View();
+            }
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public JsonResult DeleteCategory(int id) {
+            _categoryRepository.Delete(id);
+            return Json(new {
+                valid = true,
+                Message = "Category was deleted Succesfully",
+                redirect = "/Category/AdminIndex"
+            });
+        }
+        [ChildActionOnly]
+        public ActionResult PartialFrontEndTopMenu()
+        {
+            tCategory cat = MembershipHelper.CurrentCity;
+            return PartialView(cat);
+        }
+
+        
+
+        [ChildActionOnly]
+        public ActionResult CitySelector()
+        {
+            tCategory cat = _categoryRepository.Find(MembershipHelper.CurrentCity.IDCategory);
+            List<tCategory> cats = _categoryRepository.GetListByIDCategoryType((int) Enums.enmCategoryTypes.City);
+            ViewBag.catData = cats;
+            if (cat == null) {
+                cat = cats.FirstOrDefault();
+            }
+            if (cat == null)
+                cat = new tCategory() { Name = "City Not Found", IDCategory = 0 };
+         
+            return PartialView(cat);
+        }
+
+        public ActionResult Select(tCategory selectedCat)
+        {
+            MembershipHelper.CurrentCity = selectedCat;
+            return RedirectToAction("Index", "Home");
+        }
+
+    }
+
+    public class CategoryAdminIndexModel {
+        public tCategoryModelCustom Cities { get; set; }
+        public tCategoryModelCustom ForumCategories { get; set; }
+        public tCategoryModelCustom DealCategories { get; set; }
+        public tCategoryModelCustom PartnerCategories { get; set; }
+        public tCategoryModelCustom UserGrades { get; set; }
+        public tCategoryModelCustom ContentCategories { get; set; }
+    }
+
+    public class tCategoryModelCustom {
+        public int IDCategoryType { get; set; }
+        public List<tCategory> InnerCategories { get; set; }
+    }
+
+
+}

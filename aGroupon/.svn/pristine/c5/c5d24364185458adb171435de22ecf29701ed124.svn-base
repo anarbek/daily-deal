@@ -1,0 +1,46 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using aGrouponClasses.Repositories;
+using aGrouponClasses.Models;
+using aGrouponClasses.Utils;
+using B2B.BLL;
+
+namespace aGrouponProjectMain.Controllers {
+    public class HomeController : Controller {
+        private readonly IDealRepository _dealRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        public HomeController( IDealRepository dealRepository,ICategoryRepository categoryRepository) {
+            _dealRepository = dealRepository;
+            _categoryRepository = categoryRepository;
+        }
+
+        public HomeController()
+            : this(new DealRepositoryEF(),new CategoryRepositoryEF()) {
+        }
+        public ActionResult Index() {
+            if (MembershipHelper.CurrentCity == null || MembershipHelper.CurrentCity.IDCategory==0)
+            {
+                tCategory cat = _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.City).
+                                FirstOrDefault();
+
+                if (cat == null)
+                    cat = new tCategory() { Name = "City Not Found", IDCategory = 0 };
+                MembershipHelper.CurrentCity = cat;
+            }
+            tDeal currentDeal = _dealRepository.GetLatestDeal(MembershipHelper.CurrentCity.IDCategory);
+            if (currentDeal == null) currentDeal = new tDeal();
+            if (MembershipHelper.CurrentCity != null && currentDeal!=null)
+                ViewBag.DealsBySameCategory = _dealRepository.GetListByIDCategory(currentDeal.IDDealCategory).Take(6).ToList();
+            else
+                ViewBag.DealsBySameCategory = new List<tDeal>();
+            return View(currentDeal);
+        }
+
+        public ActionResult About() {
+            return View();
+        }
+    }
+}

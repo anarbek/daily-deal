@@ -1,0 +1,70 @@
+﻿@model aGrouponProjectMain.Controllers.CategoryAdminIndexModel
+@{
+    ViewBag.Title = "AdminIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CustomJS{
+   <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/CustomAdminFunctions.js")"></script>
+   <script type="text/javascript">
+       jQuery('#dyntable').dataTable({
+           "sPaginationType": "full_numbers"
+       });
+
+       jQuery('#dyntable2').dataTable({
+           "sPaginationType": "full_numbers",
+           "aaSortingFixed": [[0, 'asc']],
+           "fnDrawCallback": function (oSettings) {
+               jQuery('input:checkbox,input:radio').uniform();
+               //jQuery.uniform.update();
+           }
+       });
+
+
+       ///// TRANSFORM CHECKBOX AND RADIO BOX USING UNIFORM PLUGIN /////
+       jQuery('input:checkbox,input:radio').uniform();
+   </script>
+ }
+
+<div class="pageheader">
+            <h1 class="pagetitle">Categories</h1>
+            <span class="pagedesc">Manage Categories Here</span>
+            
+            
+            <ul class="hornav">
+                <li class="current"><a href="#cities">Cities</a></li>
+                <li><a href="#dealcategories">Deal Category</a></li>
+                <li><a href="#forumcategories">Forum Category</a></li>
+                <li><a href="#partnercategories">Partner Category</a></li>
+                <li><a href="#usergrades">User Grades</a></li>
+                <li><a href="#contentcategories">Content Categories</a></li>
+            </ul>
+        </div><!--pageheader-->
+        
+        <div id="contentwrapper" class="contentwrapper">
+        
+           
+        	<div id="cities" class="subcontent">
+                    @Html.Partial("_CategoriesByIDCategoryType", Model.Cities) 
+            </div><!-- #cities -->
+            
+            <div id="dealcategories" class="subcontent" style="display: none;">
+            	 @Html.Partial("_CategoriesByIDCategoryType", Model.DealCategories) 
+            </div><!-- #dealcategories -->
+
+             <div id="forumcategories" class="subcontent" style="display: none;">
+            	&nbsp;@Html.Partial("_CategoriesByIDCategoryType", Model.ForumCategories) 
+            </div><!-- #activitiesforumcategories -->
+
+            <div id="partnercategories" class="subcontent" style="display: none;">
+            	&nbsp;@Html.Partial("_CategoriesByIDCategoryType", Model.PartnerCategories) 
+            </div><!-- #partnercategories -->
+
+            <div id="usergrades" class="subcontent" style="display: none;">
+            	&nbsp;@Html.Partial("_CategoriesByIDCategoryType", Model.UserGrades) 
+            </div><!-- #usergrades -->
+
+             <div id="contentcategories" class="subcontent" style="display: none;">
+            	&nbsp;@Html.Partial("_CategoriesByIDCategoryType", Model.ContentCategories) 
+            </div><!-- #contentcategories -->
+        
+        </div><!--contentwrapper-->

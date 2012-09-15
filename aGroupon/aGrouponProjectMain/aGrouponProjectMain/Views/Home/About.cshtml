@@ -1,0 +1,10 @@
+﻿@model aGrouponClasses.Models.tContent
+@{
+    ViewBag.Title = "About Us";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2> @Html.DisplayFor(model=>model.Name)</h2>
+<p>
+     @Html.Raw(Model.Description)
+</p>

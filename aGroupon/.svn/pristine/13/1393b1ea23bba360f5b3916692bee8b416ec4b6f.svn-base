@@ -1,0 +1,29 @@
+﻿@model aGrouponProjectMain.Controllers.CouponConsumeModel
+@Html.ValidationSummary()
+            @if (ViewBag.CurrentMessage == null) { 
+                <fieldset>
+                <p>
+                    <label>
+                        Coupon No</label>
+                    <span class="field">
+                        @Html.EditorFor(model => model.CouponNo)
+                    </span>
+                    @Html.ValidationMessageFor(model => model.CouponNo)
+                </p>
+                <p>
+                    <label>
+                        Coupon Code</label>
+                    <span class="field">
+                        @Html.EditorFor(model => model.CouponCode)
+                    </span>
+                    @Html.ValidationMessageFor(model => model.CouponCode)
+                </p>
+                <p class="stdformbutton">
+                    <button class="submit radius2" id="btnSubmit">
+                        @ViewBag.SubmitButtonTest </button>
+                    <input type="reset" class="reset radius2" value="Reset" />
+                </p>
+            </fieldset>
+            } else { 
+                @ViewBag.CurrentMessage
+            }

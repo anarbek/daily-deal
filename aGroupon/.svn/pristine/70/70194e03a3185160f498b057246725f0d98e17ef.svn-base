@@ -1,0 +1,25 @@
+﻿@model aGrouponProjectMain.Controllers.PaymentResultModel
+
+@{
+    ViewBag.Title = "MakePayment";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>MakePayment</h2>
+
+<fieldset>
+    <legend>PaymentResultModel</legend>
+
+
+    <div class="display-label">ErrorMessage</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StatusMessage)
+    </div>
+    @if ( Model.PaymentStatus == true) {
+    <div class="display-label">CouponCode</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CouponCode)
+    </div>
+    }
+   
+</fieldset>

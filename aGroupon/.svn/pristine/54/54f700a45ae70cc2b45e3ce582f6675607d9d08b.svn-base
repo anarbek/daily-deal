@@ -1,0 +1,42 @@
+﻿@model aGrouponProjectMain.Controllers.UserAdminIndexModel
+@{
+    ViewBag.Title = "AdminIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CustomJS{
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/CustomAdminFunctions.js")"></script>
+   
+ }
+<div class="pageheader">
+ <h1 class="pagetitle">Users</h1>
+            <span class="pagedesc">Manage Users Here</span>
+            
+            
+            <ul class="hornav">
+                <li class="current"><a href="#Partners">Partners</a></li>
+                <li><a href="#Users">Users</a></li>
+                <li><a href="#Moderators">Moderators</a></li>
+                <li><a href="#Admins">Admins</a></li>
+            </ul>
+        </div><!--pageheader-->
+        
+        <div id="contentwrapper" class="contentwrapper">
+        
+           
+        	<div id="Partners" class="subcontent">
+                     @Html.Partial("_UsersByRoles", Model.Partners) 
+            </div><!-- #Partners -->
+            
+            <div id="Users" class="subcontent" style="display: none;">
+            	 @Html.Partial("_UsersByRoles", Model.Users) 
+            </div><!-- #Users -->
+
+             <div id="Moderators" class="subcontent" style="display: none;">
+            	@Html.Partial("_UsersByRoles", Model.Moderators) 
+            </div><!-- #Moderators -->
+
+            <div id="Admins" class="subcontent" style="display: none;">
+            	@Html.Partial("_UsersByRoles", Model.Admins) 
+            </div><!-- #Admins -->
+        
+        </div><!--contentwrapper-->

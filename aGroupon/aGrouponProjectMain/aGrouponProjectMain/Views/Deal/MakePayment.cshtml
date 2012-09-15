@@ -1,0 +1,44 @@
+﻿@model aGrouponProjectMain.Controllers.PaymentResultModel
+
+@{
+    ViewBag.Title = "MakePayment";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>MakePayment</h2>
+
+<fieldset>
+    <legend>PaymentResultModel</legend>
+
+    @Html.ValidationSummary()
+    
+    @if (Model.PaymentType == (int)aGrouponClasses.Utils.Enums.enmPaymentType.DemirBankCreditCard && Model.PaymentStatus == true) {
+        <div class="display-field">
+        @Html.DisplayFor(model => model.StatusMessage)
+    </div>
+    <div class="display-label">CouponCode</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CouponCode)
+    </div>
+    }
+    @if (Model.PaymentType == (int)aGrouponClasses.Utils.Enums.enmPaymentType.BeelineKG) {
+        using (Html.BeginForm("SMSMessageApprove", "Deal", FormMethod.Post, new { id = "add-form", @class = "stdform stdform2" })) {
+              if (Model.PaymentStatus == true) {
+                        <div class="display-field">
+                        @Html.DisplayFor(model => model.StatusMessage)
+                    </div>
+                  }
+            <div class="display-label">@Html.LabelFor(model => model.PaymentCode)</div>
+            <div class="display-field">
+                @Html.TextBoxFor(model => model.PaymentCode)
+            </div>
+            @Html.ValidationMessageFor(model => model.PaymentCode)
+
+            @Html.HiddenFor(model => model.SMSUniqueID)
+             @Html.HiddenFor(model => model.IDDeal)
+            @Html.HiddenFor(model => model.Quantity)
+            @Html.HiddenFor(model => model.PaymentType)
+            <button type="submit">Checkout</button>
+        }
+    }
+</fieldset>

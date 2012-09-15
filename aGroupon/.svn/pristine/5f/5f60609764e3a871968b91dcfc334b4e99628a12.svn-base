@@ -1,0 +1,39 @@
+﻿@model IEnumerable<aGrouponClasses.Models.tCoupon>
+@{
+    ViewBag.Title = "MyCoupons";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<style>
+    .info_table td
+    {
+        text-align: left;
+    }
+</style>
+<h2>
+    MyCoupons</h2>
+<table class="info_table" width="100%">
+    <tr>
+        <th>
+            Deal Name
+        </th>
+        <th>
+            Coupon No
+        </th>
+        <th>
+            Due Time
+        </th>
+    </tr>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tOrders.FirstOrDefault().tDeal.DealTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateEnd)
+            </td>
+        </tr>
+    }
+</table>

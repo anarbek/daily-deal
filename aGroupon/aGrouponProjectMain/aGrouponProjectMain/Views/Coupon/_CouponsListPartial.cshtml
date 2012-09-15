@@ -1,0 +1,72 @@
+﻿@model aGrouponProjectMain.Controllers.tCouponModelCustom
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="tableoptions">
+     @if (@Model.CouponType == (int)aGrouponClasses.Utils.Enums.enmCoupontype.Usable || @Model.CouponType == (int)aGrouponClasses.Utils.Enums.enmCoupontype.Expired) {
+                	@:<button class="deletebutton radius3" onclick="DeleteButtonClick('/Coupon/DeleteMultiple');" title="@Model.TableName">Delete Selected</button> &nbsp;
+     }
+                   
+                </div><!--tableoptions-->
+<table  cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablecb" id="@Model.TableName">
+<colgroup>
+                         <col class="con0" style="width: 4%" />
+                        <col class="con1">
+                        <col class="con0">
+                        <col class="con1">
+                        <col class="con0">
+                        <col class="con1">
+                        <col class="con0">
+                        <col class="con1">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="head0" name="NotFilterable"><input type="checkbox" class="checkall" /></th>
+                            <th class="head1" name="Filterable">ID</th>
+                            <th class="head1" name="Filterable">Partner</th>
+                            <th class="head0" name="Filterable">Code</th>
+                            <th class="head1" name="Filterable">CustomCode</th>
+                            <th class="head0" name="Filterable">CouponValue</th>
+                            <th class="head1" name="Filterable">DateBegin</th>
+                             <th class="head0" name="Filterable">DateEnd</th>
+                              <th class="head0" name="Filterable">DateAdded</th>
+                            <th class="head1" name="NotFilterable">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                        	 <th class="head0" name="NotFilterable"><input type="checkbox" class="checkall" /></th>
+                             <th class="head1" name="Filterable">ID</th>
+                            <th class="head1" name="Filterable">Partner</th>
+                            <th class="head0" name="Filterable">Code</th>
+                            <th class="head1" name="Filterable">CustomCode</th>
+                            <th class="head0" name="Filterable">CouponValue</th>
+                            <th class="head1" name="Filterable">DateBegin</th>
+                             <th class="head0" name="Filterable">DateEnd</th>
+                              <th class="head0" name="Filterable">DateAdded</th>
+                            <th class="head1" name="NotFilterable">&nbsp;</th>
+                        </tr>
+                    </tfoot>
+    
+
+@*@foreach (var item in Model.CouponList) {
+    <tr id="@item.IDCoupon">
+                            <td align="center"><input type="checkbox" /></td>
+                            <td class="con1"> @Html.DisplayFor(modelItem => item.tUser.UserName)</td>
+                            <td class="con0">@Html.DisplayFor(modelItem => item.Code)</td>
+                            <td class="center"> @Html.DisplayFor(modelItem => item.CustomCode)</td>
+                            <td class="center"> @Html.DisplayFor(modelItem => item.CouponValue)</td>
+                            <td class="center"> @Html.DisplayFor(modelItem => item.DateBegin)</td>
+                            <td class="center"> @Html.DisplayFor(modelItem => item.DateEnd)</td>
+                            <td class="center"> @Html.DisplayFor(modelItem => item.DateAdded)</td>
+                            <td class="center">
+                                @if (@Model.CouponType == (int)aGrouponClasses.Utils.Enums.enmCoupontype.Usable || @Model.CouponType == (int)aGrouponClasses.Utils.Enums.enmCoupontype.Expired) {
+                                    @:<a name="RowDelete" onclick="PrepareDelete(this);return false;" href="#">Delete</a>
+                                }   
+                            </td>
+     </tr>
+    
+}*@
+
+</table>

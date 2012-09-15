@@ -1,0 +1,50 @@
+﻿<!------ FOOTER ------>
+<div class="footer">
+    <div class="wrapper">
+        <div class="footer-background">
+            <div class="footer-wripper">
+                <!--TEXT WIDGET-->
+                <div class="footer_box">
+                    @Html.Action("GetContentForMainSitePartial", "Content", new { Code = "leftbottom" })
+                </div>
+                <!--/footer_box -->
+                <div class="border-vertical">
+                </div>
+                <!--TWITTER WIDGET-->
+                <div class="footer_box">
+                    @Html.Action("GetContentForMainSitePartial", "Content", new { Code = "twitterBox" })
+                </div>
+                <!--/footer_box-->
+                <div class="border-vertical">
+                </div>
+                <!--CUSTOM MENU-->
+                <div class="footer_box">
+                    <h3 class="sidebar_widgettitle">
+                        Other Pages</h3>
+                    <div class="menu-menu-container">
+                        <ul class="menu">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="@Url.Content("~/Content/ContentDetails/5")">About Our Deals</a></li>
+                            <li><a href="@Url.Content("~/")">All Deals</a></li>
+                            <li><a href="@Url.Content("~/ContactUs")">Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!--footer_box-->
+            </div>
+            <!--content-wripper-->
+        </div>
+        <!--footer-background-->
+        <!--FOOTER-COPY-->
+        <div class="footer-copy">
+            <div class="copy-text">
+                Copyright Information Goes Here 2010. All Rights Reserved.<br />
+                Designed by <a href="#">Themesaholic</a>
+            </div>
+            <!--copy-text-->
+        </div>
+        <!--footer-copy-->
+    </div>
+    <!--/wrapper-->
+</div>
+<!--/footer-->

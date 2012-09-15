@@ -1,0 +1,12 @@
+﻿@model aGrouponClasses.Models.tCategory
+           
+@using (Html.BeginForm("Select", "Category", FormMethod.Post, new { id = "add-form", @class = "stdform stdform2" })) {
+    @Html.DropDownListFor(Model => Model.IDCategory, ((IEnumerable<aGrouponClasses.Models.tCategory>)ViewBag.catData).Select(option => new SelectListItem {
+    Text = (option == null ? "None" : option.Name),
+    Value = option.IDCategory.ToString(),
+    Selected = (Model != null) && (option.IDCategory == Model.IDCategory)
+}), "Select Group...", new { @class = "required", @title = "Please select a city!" })
+
+    <button class="submit" id="btnSubmit">
+                    Select City</button>
+}

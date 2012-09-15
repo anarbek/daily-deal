@@ -1,0 +1,10 @@
+﻿@model IEnumerable< aGrouponClasses.Models.tContent>
+<div class="nav left" style="padding-top:0px;padding-bottom:15px;padding-left:0px;">
+<ul class="sf-menu sf-js-enabled sf-shadow">         
+@foreach (aGrouponClasses.Models.tContent item in Model) {
+
+<li><a href="/Content/ContentDetails/@item.IDContent">@item.Name </a></li>
+
+}
+</ul>
+</div>

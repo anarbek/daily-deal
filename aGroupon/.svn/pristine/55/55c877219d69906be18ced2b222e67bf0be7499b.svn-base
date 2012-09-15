@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aGrouponProjectMain", "aGrouponProjectMain\aGrouponProjectMain.csproj", "{791E6DA0-83F0-46A7-B292-A6FDB5A8A300}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "aGrouponClasses", "aGrouponClasses\aGrouponClasses.csproj", "{FFB699D2-D87C-433E-9A63-2C1E23DF191C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{791E6DA0-83F0-46A7-B292-A6FDB5A8A300}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{791E6DA0-83F0-46A7-B292-A6FDB5A8A300}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{791E6DA0-83F0-46A7-B292-A6FDB5A8A300}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{791E6DA0-83F0-46A7-B292-A6FDB5A8A300}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFB699D2-D87C-433E-9A63-2C1E23DF191C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFB699D2-D87C-433E-9A63-2C1E23DF191C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFB699D2-D87C-433E-9A63-2C1E23DF191C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFB699D2-D87C-433E-9A63-2C1E23DF191C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

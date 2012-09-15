@@ -1,0 +1,153 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
+using aGrouponClasses.Models;
+using aGrouponClasses.Utils;
+using B2B.Models;
+using aGrouponClasses.Repositories;
+
+namespace aGrouponProjectMain.Controllers
+{
+    public partial class UserController : Controller
+    {
+        private readonly IUSERRepository _userRepository;
+        private readonly IROLERepository _roleRepository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IOrderRepository _orderRepository;
+        private readonly IDealRepository _dealRepository;
+        private readonly ICouponRepository _couponRepository;
+
+        public UserController(IUSERRepository userRepository, IROLERepository roleRepository, 
+            ICategoryRepository cateogoryRepository, IOrderRepository orderRepository, 
+            IDealRepository dealRepository, ICouponRepository couponRepository) {
+            _userRepository = userRepository;
+            _roleRepository = roleRepository;
+            _categoryRepository = cateogoryRepository;
+            _orderRepository = orderRepository;
+            _dealRepository = dealRepository;
+            _couponRepository = couponRepository;
+        }
+
+        public UserController()
+            : this(new USERRepositoryEF(), new ROLERepositoryEF(), new CategoryRepositoryEF(), new OrderRepositoryEF(), new DealRepositoryEF(), new CouponRepositoryEF()) {
+        }
+
+       [Authorize(Roles="Admin")]
+        public ActionResult AdminIndex()
+        {
+            UserAdminIndexModel userModel = new UserAdminIndexModel();
+            userModel.Admins = new tUserModelCustom {
+                IDRole = (int)Enums.enmRoles.Admin,
+                UserList =
+                    _userRepository.GetListByIDRole((int)Enums.enmRoles.Admin)
+            };
+            userModel.Partners = new tUserModelCustom {
+                IDRole = (int)Enums.enmRoles.Partner,
+                UserList =
+                    _userRepository.GetListByIDRole((int)Enums.enmRoles.Partner)
+            };
+            userModel.Users = new tUserModelCustom {
+                IDRole = (int)Enums.enmRoles.User,
+                UserList =
+                    _userRepository.GetListByIDRole((int)Enums.enmRoles.User)
+            };
+            userModel.Moderators = new tUserModelCustom {
+                IDRole = (int)Enums.enmRoles.Moderator,
+                UserList =
+                    _userRepository.GetListByIDRole((int)Enums.enmRoles.Moderator)
+            };
+            return View(userModel);
+        }
+
+       //
+       // GET: /Category/Create
+       [Authorize(Roles = "Admin")]
+       public ActionResult Create(int IDRole) {
+           //List<tGroup> = 
+           List<tRole> roleData = _roleRepository.All.ToList();
+           List<tCategory> partnerCategoryData = _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.PartnersCategory);
+           List<tCategory> cityData = _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.City);
+           ViewBag.roleData = roleData;
+           ViewBag.categoryData = partnerCategoryData;
+           ViewBag.cityData = cityData;
+           ViewBag.IDRole = IDRole;
+           return View();
+       }
+
+       [HttpPost]
+       [Authorize(Roles = "Admin")]
+       public JsonResult CreateAjax(tUser user)
+       {
+           user.DateAdded = DateTime.Now;
+           if (ModelState.IsValid) {
+               _userRepository.InsertOrUpdate(user);
+               return Json(new {
+                   objectAddedName = user.UserName,
+                   valid = true,
+                   Message = "User was added Succesfully"
+               });
+           } else {
+               return Json(new {
+                   objectAddedName = "",
+                   valid = false,
+                   Message = "Fill All Fields please"
+               });
+           }
+       }
+
+       public ActionResult Edit(int id) {
+           List<tRole> roleData = _roleRepository.All.ToList();
+           List<tCategory> partnerCategoryData = _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.PartnersCategory);
+           List<tCategory> cityData = _categoryRepository.GetListByIDCategoryType((int)Enums.enmCategoryTypes.City);
+           ViewBag.roleData = roleData;
+           ViewBag.categoryData = partnerCategoryData;
+           ViewBag.cityData = cityData;
+           tUser currentUser = _userRepository.Find(id);
+           return View(currentUser);
+       }
+
+       [HttpPost]
+       [Authorize(Roles = "Admin")]
+       public JsonResult EditAjax(tUser userData) {
+           if (ModelState.IsValid) {
+               _userRepository.InsertOrUpdate(userData);
+               return Json(new {
+                   objectAddedName = userData.UserName,
+                   valid = true,
+                   Message = "User was updated Succesfully"
+               });
+           } else {
+               return Json(new {
+                   objectAddedName = "",
+                   valid = false,
+                   Message = "Fill All Fields please"
+               });
+           }
+       }
+
+       [HttpPost]
+       [Authorize(Roles = "Admin")]
+       public JsonResult DeleteUser(int id) {
+           _userRepository.Delete(id);
+           return Json(new {
+               valid = true,
+               Message = "User was deleted Succesfully",
+               redirect = "/User/AdminIndex"
+           });
+       }
+
+    }
+
+    public class UserAdminIndexModel {
+        public tUserModelCustom Partners { get; set; }
+        public tUserModelCustom Users { get; set; }
+        public tUserModelCustom Moderators { get; set; }
+        public tUserModelCustom Admins { get; set; }
+    }
+
+    public class tUserModelCustom {
+        public int IDRole { get; set; }
+        public List<tUser> UserList { get; set; }
+    }
+}

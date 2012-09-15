@@ -1,0 +1,78 @@
+﻿@model IEnumerable<aGrouponClasses.Models.tDeal>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="pageheader">
+    <h1 class="pagetitle">
+        Deal</h1>
+    <span class="pagedesc"></span>
+    <ul class="hornav">
+        <li class="current"><a href="#Orders">Deals</a></li>
+    </ul>
+</div>
+<!--pageheader-->
+<div id="contentwrapper" class="contentwrapper">
+    <div id="Coupons" class="subcontent">
+        <p id="DescriptionDiv">
+        </p>
+        <table cellpadding="0" cellspacing="0" border="0" class="stdtable">
+        <colgroup>
+                <col class="con0">
+                <col class="con1">
+                <col class="con0">
+                <col class="con1">
+                <col class="con0">
+                <col class="con1">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th class="head0">
+                        Deal name
+                    </th>
+                    <th class="head1">
+                        Category
+                    </th>
+                    <th class="head0">
+                        Date
+                    </th>
+                    <th class="head1">
+                        Deal tipped
+                    </th>
+                    <th class="head0">
+                        Current price
+                    </th>
+                    <th class="head1">
+                        Operation
+                    </th>
+                </tr>
+            </thead>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DealTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tCategory.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateStarting)<br />
+                        @Html.DisplayFor(modelItem => item.DateEnding)
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DealPrice)<br />
+                        @Html.DisplayFor(modelItem => item.MarketPrice)
+                    </td>
+                    
+                    <td>
+                        @Html.ActionLink("Details", "PartnerDealDetails", new { IDDeal = item.IDDeal })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <!-- #cities -->
+</div>
+<!--contentwrapper-->

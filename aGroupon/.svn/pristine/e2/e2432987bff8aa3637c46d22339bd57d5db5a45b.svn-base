@@ -1,0 +1,103 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using aGrouponClasses.Models;
+using aGrouponClasses.Repositories;
+using aGrouponClasses.Utils;
+
+namespace aGrouponProjectMain.Controllers {
+    public class OrderController : Controller {
+        private readonly IOrderRepository _orderRepository;
+        public OrderController(IOrderRepository orderRepository) {
+            _orderRepository = orderRepository;
+        }
+
+        public OrderController() : this(new OrderRepositoryEF()) { }
+
+        //
+        // GET: /Order/
+        [Authorize(Roles = "Admin")]
+        public ActionResult AdminIndex(int? PaidStatus) {
+            if (PaidStatus == null) PaidStatus = (int)Enums.enmOrderStatus.Paid;
+            tOrderAdminModel customCouponModel = new tOrderAdminModel();
+            customCouponModel.PaidStatus = (int)PaidStatus;
+            customCouponModel.OrderStatusName = PaidStatus == (int) Enums.enmOrderStatus.Paid ? "Paid" : "Not Paid";
+            return View(customCouponModel);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public JsonResult GetOrderJSonByPaidStatus(int? PaidStatus) {
+            if (PaidStatus == null) PaidStatus = (int)Enums.enmOrderStatus.Paid;
+            List<tOrder> dealList = _orderRepository.GetListByPaidStatus((int)PaidStatus);
+            List<tOrderAdminJson> res = new List<tOrderAdminJson>();
+
+            int i, n = dealList.Count;
+            //res[0] = new string[n][];
+            for (i = 0; i < n; i++) {
+                string lnkDetail =
+                    "<a name=\"RowDelete\" href=\"/Order/Edit/" + dealList[i].IDOrder + "\">Edit</a>";
+                tOrderAdminJson obj = new tOrderAdminJson {
+                    ID = dealList[i].IDOrder,
+                    Title = dealList[i].tDeal.DealTitle,
+                    UserName = dealList[i].tUser.UserName,
+                    Category = dealList[i].tDeal.tCategory.Name,
+                    Price = dealList[i].tDeal.DealPrice,
+                    lnkDelete = lnkDetail
+                };
+                res.Add(obj);
+            }
+            return Json(new {
+                sEcho = 1,
+                iTotalRecords = res.Count,
+                iTotalDisplayRecords = res.Count,
+                aaData = res
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Edit(int id) {
+            tOrder currentOrder = _orderRepository.Find(id);
+            return View(currentOrder);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public JsonResult EditAjax(tOrder orderData) {
+            if (ModelState.IsValid)
+            {
+                tOrder oldOrder = _orderRepository.Find(orderData.IDOrder);
+                oldOrder.OrderNotes = orderData.OrderNotes;
+                _orderRepository.InsertOrUpdate(oldOrder);
+                return Json(new {
+                    objectAddedName = orderData.tDeal.DealTitle,
+                    valid = true,
+                    Message = "Order Data was updated Succesfully"
+                });
+            } else {
+                return Json(new {
+                    objectAddedName = "",
+                    valid = false,
+                    Message = "Fill All Fields please"
+                });
+            }
+        }
+
+    }
+
+    public class tOrderAdminModel
+    {
+        public int PaidStatus { get; set; }
+        public string OrderStatusName { get; set; }
+    }
+    public class tOrderAdminJson
+    {
+        public int ID { get; set; }
+        public string Title { get; set; }
+        public string UserName { get; set; }
+        public string Category { get; set; }
+        public decimal Price { get; set; }
+        public string lnkDelete { get; set; }
+    }
+}

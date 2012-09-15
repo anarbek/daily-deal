@@ -1,0 +1,161 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using aGrouponClasses.Models;
+using aGrouponClasses.Utils;
+
+namespace aGrouponClasses.Repositories {
+    public class CouponRepositoryEF : ICouponRepository {
+        aGrouponModelsDataContext context = new aGrouponModelsDataContext();
+
+        public IQueryable<tCoupon> All
+        {
+            get { return context.tCoupons; }
+        }
+
+        public tCoupon Find(int id)
+        {
+            return context.tCoupons.Where(t => t.IDCoupon.Equals(id)).FirstOrDefault();
+        }
+
+        public tCoupon FindByCustomNo(string CouponNo) {
+            return context.tCoupons.Where(t => t.CustomCode.Equals(CouponNo)).FirstOrDefault();
+        }
+
+        public List<tCoupon> GetListByIDUserWhoBought(int UserID)
+        {
+            return context.tCoupons.Where(t => t.tOrders.FirstOrDefault().IDUserBought.Equals(UserID)).ToList();
+        }
+
+        public void InsertOrUpdate(tCoupon user)
+        {
+            if (user.IDCoupon == default(int)) {
+                // New entity
+                context.tCoupons.InsertOnSubmit(user);
+            } else {
+                // Existing entity
+                tCoupon userToUpdate = Find(user.IDCoupon);
+                if (userToUpdate != null && userToUpdate.IDCoupon > 0) {
+                    userToUpdate.IDPartner = user.IDPartner;
+                    userToUpdate.Code = user.Code;
+                    userToUpdate.CouponValue = user.CouponValue;
+                    userToUpdate.DateBegin = user.DateBegin;
+                    userToUpdate.DateEnd = user.DateEnd;
+                    userToUpdate.DateAdded = user.DateAdded;
+                    userToUpdate.CouponStatus = user.CouponStatus;
+                    userToUpdate.ConsumeStatus = user.ConsumeStatus;
+                }
+            }
+        }
+
+        public void Insert(List<tCoupon> couponsToInsert)
+        {
+            int i, n = couponsToInsert.Count;
+            for (i = 0; i < n; i++) {
+                context.tCoupons.InsertOnSubmit(couponsToInsert[i]);
+            }
+            context.SubmitChanges();
+        }
+
+        public void Delete(int id)
+        {
+            tCoupon user = Find(id);
+            if (user != null && user.IDCoupon > 0)
+                context.tCoupons.DeleteOnSubmit(user);
+            context.SubmitChanges();
+        }
+
+        public void DeleteByCode(string code)
+        {
+            List<tCoupon> coupons = context.tCoupons.Where(t => t.Code.Equals(code)).ToList();
+            int couponsCount = coupons.Count();
+            for (int i = 0; i < couponsCount; i++)
+            {
+                context.tCoupons.DeleteOnSubmit(coupons[i]);
+            }
+            context.SubmitChanges();
+        }
+
+        public void Save()
+        {
+            context.SubmitChanges();
+        }
+
+        public List<tCoupon> GetListByIDPartner(int idPartner)
+        {
+            return context.tCoupons.Where(t => t.IDPartner.Equals(idPartner)).ToList();
+        }
+
+        public List<tCoupon> GetListByIDPartnerNotUsed(int idPartner)
+        {
+            return context.tCoupons.Where(t => t.IDPartner.Equals(idPartner) && t.CouponStatus == (int)Enums.enmCouponStatus.Unused).ToList();
+        }
+        public List<tCoupon> GetListByIDPartnerNotUsedAndNotConsumed(int idPartner) {
+            return context.tCoupons.Where(t => t.IDPartner.Equals(idPartner) && 
+                t.CouponStatus == (int)Enums.enmCouponStatus.Unused &&
+                t.ConsumeStatus == (int)Enums.enmCouponConsumeStatus.NotConsumed).ToList();
+        }
+
+        public List<tCoupon> GetListByIDPartnerUsed(int IDPartner)
+        {
+            return context.tCoupons.Where(t => t.IDPartner.Equals(IDPartner) && t.CouponStatus == (int)Enums.enmCouponStatus.Used).ToList();
+        }
+
+       
+
+        public List<tCoupon> GetCouponsUsable()
+        {
+            return context.tCoupons.ToList();//.Take(40).ToList();
+        }
+
+        public List<tCoupon> GetCouponsUsed() {
+            return context.tCoupons.ToList();
+        }
+
+        public List<tCoupon> GetCouponsExpired() {
+            return context.tCoupons.ToList();
+        }
+
+
+        public int Delete(int[] array)
+        {
+            tCoupon[] coupons =
+                (from t in context.tCoupons where array.Contains(t.IDCoupon) select t).ToArray();
+            context.tCoupons.DeleteAllOnSubmit(coupons);
+            context.SubmitChanges();
+            return 1;
+        }
+
+       
+    }
+
+    public interface ICouponRepository
+    {
+        IQueryable<tCoupon> All { get; }
+        tCoupon Find(int id);
+        void InsertOrUpdate(tCoupon user);
+        void Insert(List<tCoupon> couponsToInsert);
+        void Delete(int id);
+        void DeleteByCode(string Code);
+        void Save();
+
+        List<tCoupon> GetListByIDPartner(int idPartner);
+        List<tCoupon> GetListByIDPartnerNotUsed(int idPartner);
+
+        List<tCoupon> GetCouponsUsable();
+
+        List<tCoupon> GetCouponsUsed();
+
+        List<tCoupon> GetCouponsExpired();
+
+        int Delete(int[] array);
+
+        List<tCoupon> GetListByIDPartnerNotUsedAndNotConsumed(int p);
+
+        List<tCoupon> GetListByIDPartnerUsed(int IDPartner);
+
+        tCoupon FindByCustomNo(string p);
+
+        List<tCoupon> GetListByIDUserWhoBought(int UserID);
+    }
+}

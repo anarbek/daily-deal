@@ -1,0 +1,7 @@
+.account-withdraw-table td, tr{
+    height: 35px!important;
+}
+
+.account-withdraw-input ul li.withdraw-input-one input{
+    margin: -10px 73px 0 25px;
+}

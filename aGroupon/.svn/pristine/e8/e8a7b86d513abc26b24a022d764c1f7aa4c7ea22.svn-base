@@ -1,0 +1,44 @@
+﻿@model IQueryable<aGrouponClasses.Models.tContent>
+@{
+    ViewBag.Title = "AdminIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CustomJS{
+   <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/CustomAdminFunctions.js")"></script>
+   <script type="text/javascript">
+//       jQuery('#dyntable').dataTable({
+//           "sPaginationType": "full_numbers"
+//       });
+
+//       jQuery('#dyntable2').dataTable({
+//           "sPaginationType": "full_numbers",
+//           "aaSortingFixed": [[0, 'asc']],
+//           "fnDrawCallback": function (oSettings) {
+//               jQuery('input:checkbox,input:radio').uniform();
+//               //jQuery.uniform.update();
+//           }
+//       });
+
+
+       ///// TRANSFORM CHECKBOX AND RADIO BOX USING UNIFORM PLUGIN /////
+       jQuery('input:checkbox,input:radio').uniform();
+   </script>
+ }
+
+<div class="pageheader">           
+            
+            <ul class="hornav">
+                <li class="current"><a href="#cities">Content</a></li>
+            </ul>
+        </div><!--pageheader-->
+        
+        <div id="contentwrapper" class="contentwrapper">
+        
+           
+        	<div id="cities" class="subcontent">
+                    @Html.Partial("ContentAdminListPartial", Model) 
+            </div><!-- #Content -->
+            
+           
+        
+        </div><!--contentwrapper-->

@@ -1,0 +1,38 @@
+﻿@model aGrouponClasses.Models.tContent
+<fieldset>
+    <p id="DescriptionDiv">
+    </p>
+</fieldset>
+<p>
+                <label>
+                    Category</label>
+                <span class="field">
+                    @Html.DropDownListFor(model => model.IDCategory, ((IEnumerable<aGrouponClasses.Models.tCategory>)ViewBag.categoryData).Select(option => new SelectListItem {
+                   Text = (option == null ? "None" : option.Name),
+                   Value = option.IDCategory.ToString(),
+                   Selected = (Model != null) && (option.IDCategory == Model.IDCategory)
+               }), "Select Category...", new { @class = "required" })
+                </span>
+                @Html.ValidationMessageFor(model => model.IDCategory)
+            </p>
+<p>
+    @Html.LabelFor(model => model.Code)
+    <span class="field">
+        @Html.TextBoxFor(model => model.Code, new { @class = "longinput required" })
+    </span>
+    @Html.ValidationMessageFor(model => model.Code)
+</p>
+<p>
+    @Html.LabelFor(model => model.Name)
+    <span class="field">
+        @Html.TextBoxFor(model => model.Name, new { @class = "longinput required" })
+    </span>
+    @Html.ValidationMessageFor(model => model.Name)
+</p>
+<p>
+    @Html.LabelFor(model => model.Description)
+    <span class="field">
+        @Html.TextAreaFor(model => model.Description, new { @class = "longinput required",@rows="30" })
+    </span>
+    @Html.ValidationMessageFor(model => model.Description)
+</p>

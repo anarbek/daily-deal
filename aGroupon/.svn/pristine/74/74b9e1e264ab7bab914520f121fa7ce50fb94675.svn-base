@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 16.375, 16.875" name="aGrouponModels">
+  <DataContextMoniker Name="/aGrouponModelsDataContext" />
+  <nestedChildShapes>
+    <classShape Id="0d6b295e-92d9-4dca-afb8-431dd0f3e026" absoluteBounds="14.125, 5.375, 2, 2.3478011067708344">
+      <DataClassMoniker Name="/aGrouponModelsDataContext/tCategory" />
+      <nestedChildShapes>
+        <elementListCompartment Id="8793d2bf-60ef-4eeb-9824-2eac3ae21c32" absoluteBounds="14.14, 5.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="4f3563e3-4d7d-486b-9ca7-b503d2a53149" absoluteBounds="0.75, 4.375, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/aGrouponModelsDataContext/tCategoryType" />
+      <nestedChildShapes>
+        <elementListCompartment Id="12c53dbf-d9b4-49e7-99c0-539ea27bb3b3" absoluteBounds="0.765, 4.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="25d033e6-325a-4fc2-9d83-d7ec255fd113" absoluteBounds="0.75, 6.375, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/aGrouponModelsDataContext/tGroup" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fd196847-6490-4d00-be11-99a363e65a00" absoluteBounds="0.765, 6.835, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7475b50e-be16-4795-b938-9fecb00ce8af" absoluteBounds="0.75, 9.75, 2, 1.1939925130208344">
+      <DataClassMoniker Name="/aGrouponModelsDataContext/tRole" />
+      <nestedChildShapes>
+        <elementListCompartment Id="74022946-2798-4e1d-a091-c0c958d7e106" absoluteBounds="0.765, 10.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 4.97199625651042); (5.44791866666667 : 4.97199625651042 : JumpStart); (5.61458533333333 : 4.97199625651042 : JumpEnd); (7.16666666666667 : 4.97199625651042 : JumpStart); (7.33333333333333 : 4.97199625651042 : JumpEnd); (7.5 : 4.97199625651042); (7.5 : 2.5); (14.5104146666667 : 2.5 : JumpStart); (14.6770813333333 : 2.5 : JumpEnd); (15.125 : 2.5); (15.125 : 5.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tCategoryType/tCategoryType_tCategory" />
+      <nodes>
+        <classShapeMoniker Id="4f3563e3-4d7d-486b-9ca7-b503d2a53149" />
+        <classShapeMoniker Id="0d6b295e-92d9-4dca-afb8-431dd0f3e026" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.97199625651042); (7.25 : 6.97199625651042); (7.25 : 2.25); (14.593748 : 2.25); (14.593748 : 5.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tGroup/tGroup_tCategory" />
+      <nodes>
+        <classShapeMoniker Id="25d033e6-325a-4fc2-9d83-d7ec255fd113" />
+        <classShapeMoniker Id="0d6b295e-92d9-4dca-afb8-431dd0f3e026" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="1c868b6c-6b73-4443-99be-3f9549319e12" absoluteBounds="12, 3.25, 2, 1.1939925130208333">
+      <DataClassMoniker Name="/aGrouponModelsDataContext/tDealCity" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5ff3b6e8-6189-4e8b-a283-ffb38aa8d877" absoluteBounds="12.015, 3.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(14.593748 : 5.375); (14.593748 : 3.84699625651042); (14 : 3.84699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tCategory/tCategory_tDealCity" />
+      <nodes>
+        <classShapeMoniker Id="0d6b295e-92d9-4dca-afb8-431dd0f3e026" />
+        <classShapeMoniker Id="1c868b6c-6b73-4443-99be-3f9549319e12" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="4c68a722-eb5d-40ab-b9cc-3e2af92e7ed0" absoluteBounds="4, 9.5, 2, 2.5401025390625">
+      <DataClassMoniker Name="/aGrouponModelsDataContext/tUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2d9248b0-5d46-4994-82e4-a990aa4815c8" absoluteBounds="4.015, 9.96, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(14.125 : 6.54890055338542); (10 : 6.54890055338542); (10 : 10.3476383463542); (9.45833333333333 : 10.3476383463542 : JumpStart); (9.29166666666667 : 10.3476383463542 : JumpEnd); (6.58333333333333 : 10.3476383463542 : JumpStart); (6.41666666666667 : 10.3476383463542 : JumpEnd); (6.25 : 10.3476383463542); (6.25 : 9.25); (5.61458533333333 : 9.25 : JumpStart); (5.44791866666667 : 9.25 : JumpEnd); (5 : 9.25); (5 : 9.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tCategory/tCategory_tUser" />
+      <nodes>
+        <classShapeMoniker Id="0d6b295e-92d9-4dca-afb8-431dd0f3e026" />
+        <classShapeMoniker Id="4c68a722-eb5d-40ab-b9cc-3e2af92e7ed0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(14.125 : 7.16710283007813); (10.25 : 7.16710283007813); (10.25 : 10.5976383463542); (9.45833333333333 : 10.5976383463542 : JumpStart); (9.29166666666667 : 10.5976383463542 : JumpEnd); (6.5 : 10.5976383463542); (6.5 : 9); (5.531252 : 9); (5.531252 : 9.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tCategory/tCategory_tUser1" />
+      <nodes>
+        <classShapeMoniker Id="0d6b295e-92d9-4dca-afb8-431dd0f3e026" />
+        <classShapeMoniker Id="4c68a722-eb5d-40ab-b9cc-3e2af92e7ed0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 10.3469962565104); (4 : 10.3469962565104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tRole/tRole_tUser" />
+      <nodes>
+        <classShapeMoniker Id="7475b50e-be16-4795-b938-9fecb00ce8af" />
+        <classShapeMoniker Id="4c68a722-eb5d-40ab-b9cc-3e2af92e7ed0" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="a4d0c907-2e7e-4c30-9156-3a39050d5b5c" absoluteBounds="7.75, 2.75, 2, 7.3476383463541657">
+      <DataClassMoniker Name="/aGrouponModelsDataContext/tDeal" />
+      <nestedChildShapes>
+        <elementListCompartment Id="29eededa-0dc4-4147-b621-ab8733e5358e" absoluteBounds="7.765, 3.21, 1.9700000000000002, 6.7876383463541661" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(9.75 : 3.84699625651042); (12 : 3.84699625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tDeal/tDeal_tDealCity" />
+      <nodes>
+        <classShapeMoniker Id="a4d0c907-2e7e-4c30-9156-3a39050d5b5c" />
+        <classShapeMoniker Id="1c868b6c-6b73-4443-99be-3f9549319e12" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(14.125 : 5.89945027669271); (9.75 : 5.89945027669271)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tCategory/tCategory_tDeal" />
+      <nodes>
+        <classShapeMoniker Id="0d6b295e-92d9-4dca-afb8-431dd0f3e026" />
+        <classShapeMoniker Id="a4d0c907-2e7e-4c30-9156-3a39050d5b5c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.61099812825521); (7.75 : 6.61099812825521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tGroup/tGroup_tDeal" />
+      <nodes>
+        <classShapeMoniker Id="25d033e6-325a-4fc2-9d83-d7ec255fd113" />
+        <classShapeMoniker Id="a4d0c907-2e7e-4c30-9156-3a39050d5b5c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.531252 : 9.5); (5.531252 : 3.86099812825521); (7.16666666666667 : 3.86099812825521 : JumpStart); (7.33333333333333 : 3.86099812825521 : JumpEnd); (7.75 : 3.86099812825521)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tUser/tUser_tDeal" />
+      <nodes>
+        <classShapeMoniker Id="4c68a722-eb5d-40ab-b9cc-3e2af92e7ed0" />
+        <classShapeMoniker Id="a4d0c907-2e7e-4c30-9156-3a39050d5b5c" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="0612bf83-3fa2-4dc6-b9d0-c5103c497702" absoluteBounds="6.5, 13.875, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/aGrouponModelsDataContext/tCoupon" />
+      <nestedChildShapes>
+        <elementListCompartment Id="0db7ecbe-0831-47bd-8a08-63437bac0ded" absoluteBounds="6.5150000000000006, 14.335, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(5 : 12.0401025390625); (5 : 15.2412019856771); (6.5 : 15.2412019856771)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tUser/tUser_tCoupon" />
+      <nodes>
+        <classShapeMoniker Id="4c68a722-eb5d-40ab-b9cc-3e2af92e7ed0" />
+        <classShapeMoniker Id="0612bf83-3fa2-4dc6-b9d0-c5103c497702" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="617b6d08-8e1c-4eaa-8618-2520c7a7e575" absoluteBounds="2.125, 1.25, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/aGrouponModelsDataContext/tPaymentMessage" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a898bf1b-0535-47f5-9ed4-163d16a702ca" absoluteBounds="2.14, 1.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(7.75 : 3.07774983723958); (4.125 : 3.07774983723958)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tDeal/tDeal_tPaymentMessage" />
+      <nodes>
+        <classShapeMoniker Id="a4d0c907-2e7e-4c30-9156-3a39050d5b5c" />
+        <classShapeMoniker Id="617b6d08-8e1c-4eaa-8618-2520c7a7e575" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="14f0f83e-3bde-4de1-b41b-fd9e8c81df72" absoluteBounds="9, 11.625, 2, 3.6939111328124996">
+      <DataClassMoniker Name="/aGrouponModelsDataContext/tOrder" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ceb522bb-6706-4f6d-858b-d76516d42e43" absoluteBounds="9.015, 12.085, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(8.5 : 14.5969555664062); (9 : 14.5969555664062)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tCoupon/tCoupon_tOrder" />
+      <nodes>
+        <classShapeMoniker Id="0612bf83-3fa2-4dc6-b9d0-c5103c497702" />
+        <classShapeMoniker Id="14f0f83e-3bde-4de1-b41b-fd9e8c81df72" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(9.375 : 10.0976383463542); (9.375 : 11.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tDeal/tDeal_tOrder" />
+      <nodes>
+        <classShapeMoniker Id="a4d0c907-2e7e-4c30-9156-3a39050d5b5c" />
+        <classShapeMoniker Id="14f0f83e-3bde-4de1-b41b-fd9e8c81df72" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(6 : 11.8325512695312); (9 : 11.8325512695312)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/aGrouponModelsDataContext/tUser/tUser_tOrder" />
+      <nodes>
+        <classShapeMoniker Id="4c68a722-eb5d-40ab-b9cc-3e2af92e7ed0" />
+        <classShapeMoniker Id="14f0f83e-3bde-4de1-b41b-fd9e8c81df72" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

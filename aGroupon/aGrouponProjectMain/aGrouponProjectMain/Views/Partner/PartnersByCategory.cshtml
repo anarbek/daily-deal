@@ -1,0 +1,39 @@
+﻿@model List<aGrouponClasses.Models.tUser>
+@{
+    ViewBag.Title = "Partners";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<div class="blog-home">
+    <div class="blog-left">
+        <div class="single-deals-title">
+            Partners</div>
+        <!--/title-blog-->
+        <div class="single-deals-text">
+            <table width="100%">
+                <tr>
+                    <th>
+                        Partner Name
+                    </th>
+                    
+                    <th>
+                        Operation
+                    </th>
+                </tr>
+                @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserName)
+                        </td>
+                        
+                        <td>
+                            @Html.ActionLink("Details","Details",new { id = item.IDUser})
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+        <!--/text-->
+    </div>
+    <!--/blog-left-->
+</div>
+<!--blog-home-->

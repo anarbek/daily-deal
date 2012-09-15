@@ -1,0 +1,23 @@
+﻿@model aGrouponProjectMain.Controllers.CouponConsumeModel
+@{
+    ViewBag.Title = "CouponVerify";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="pageheader">
+    <ul class="hornav">
+        <li class="current"><a href="#cats">Coupon Consume Form</a></li>
+    </ul>
+</div>
+<!--pageheader-->
+<div id="contentwrapper" class="contentwrapper">
+    <div id="cats" class="subcontent">
+        @using (Html.BeginForm("CouponVerify", "Partner", FormMethod.Post, new { id = "add-form", @class = "stdform stdform2" })) {
+            @Html.Partial("CouponConsumeVerifyPartial", Model)
+        }
+        <br />
+    </div>
+    <!-- #cities -->
+    <p>
+        @Html.ActionLink("Back to List", @Url.Content("~/Partner/CouponsList"))
+    </p>
+</div>

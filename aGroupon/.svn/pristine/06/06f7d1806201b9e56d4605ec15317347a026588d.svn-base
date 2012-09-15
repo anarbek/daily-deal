@@ -1,0 +1,35 @@
+﻿<div class="vernav2 iconmenu">
+    	<ul>
+        	
+            <li><a href="@Url.Content("~/Category/AdminIndex")" class="widgets">Categories</a></li>
+           
+            <li><a href="@Url.Content("~/User/AdminIndex")" class="tables">Users</a></li>
+
+            <li><a href="#addons" class="addons">Coupons</a>
+            	<span class="arrow"></span>
+            	<ul id="addons">
+               		<li><a href="@Url.Content("~/Coupon/AdminIndex?CouponType=1")">Usable</a></li>
+                    <li><a href="@Url.Content("~/Coupon/AdminIndex?CouponType=2")">Used</a></li>
+                    <li><a href="@Url.Content("~/Coupon/AdminIndex?CouponType=3")">Expired</a></li>
+                </ul>
+            </li>
+           <li><a href="#deals" class="addons">Deals</a>
+            	<span class="arrow"></span>
+            	<ul id="deals">
+               		<li><a href="@Url.Content("~/Deal/AdminIndex?DealStatus=1")">Today Deals</a></li>
+                    <li><a href="@Url.Content("~/Deal/AdminIndex?DealStatus=2")">Tipped Deals</a></li>
+                    <li><a href="@Url.Content("~/Deal/AdminIndex?DealStatus=3")">Failed Deals</a></li>
+                    <li><a href="@Url.Content("~/Deal/Create")">Create a Deal</a></li>
+                </ul>
+            </li>
+            <li><a href="#orders" class="addons">Orders</a>
+            	<span class="arrow"></span>
+            	<ul id="orders">
+               		<li><a href="@Url.Content("~/Order/AdminIndex?PaidStatus=1")">Paid</a></li>
+                    <li><a href="@Url.Content("~/Order/AdminIndex?PaidStatus=2")">To Be Paid</a></li>
+                </ul>
+            </li>
+        </ul>
+        <a class="togglemenu"></a>
+        <br /><br />
+    </div>

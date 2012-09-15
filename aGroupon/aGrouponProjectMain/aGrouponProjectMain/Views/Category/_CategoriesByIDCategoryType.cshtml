@@ -1,0 +1,41 @@
+﻿@model aGrouponProjectMain.Controllers.tCategoryModelCustom
+<p>
+    @Html.ActionLink("Create New", "Create", new { IDCategoryType = Model.IDCategoryType })
+</p>
+<table  cellpadding="0" cellspacing="0" border="0" class="stdtable stdtablequick">
+<colgroup>
+                        <col class="con1">
+                        <col class="con0">
+                        <col class="con1">
+                        <col class="con0">
+                        <col class="con1">
+                        <col class="con0">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th class="head1">Group</th>
+                            <th class="head0">Name</th>
+                            <th class="head1">Slug</th>
+                            <th class="head0">InitialLetter</th>
+                            <th class="head1">DisplayFlag</th>
+                             <th class="head0">Sort</th>
+                            <th class="head1">&nbsp;</th>
+                        </tr>
+                    </thead>
+    
+
+@foreach (var item in Model.InnerCategories) {
+    <tr>
+                            <td class="con1"> @Html.DisplayFor(modelItem => item.tGroup.Name)</td>
+                            <td class="con0">@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td class="center"> @Html.DisplayFor(modelItem => item.Slug)</td>
+                            <td class="center"> @Html.DisplayFor(modelItem => item.InitialLetter)</td>
+                            <td class="center"> @Html.DisplayFor(modelItem => item.DisplayFlag)</td>
+                            <td class="center"> @Html.DisplayFor(modelItem => item.Sort)</td>
+                            <td class="center">@Html.ActionLink("Edit", "Edit", new { id = item.IDCategory }, new { @class="toggle"}) |
+                                                <a onclick='Delete("/Category/DeleteCategory",@item.IDCategory)' href="#">Delete</a></td>
+     </tr>
+    
+}
+
+</table>

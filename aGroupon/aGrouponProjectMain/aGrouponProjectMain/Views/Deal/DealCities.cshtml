@@ -1,0 +1,14 @@
+﻿@model aGrouponClasses.Models.tDeal
+<p>
+    <label>
+        Cities</label>
+    <span class="formwrapper">
+        @foreach (aGrouponClasses.Models.tCategory item in ViewBag.possibleCities) {
+            bool a = false;
+            if (Model != null) { a = Model.tDealCities.Where(t => t.IDCity.Equals(item.IDCategory)).Count() > 0; }
+            <div class="checker" id="uniform-undefined">
+                <span class="checked">
+                    <input name="chkCity" type="checkbox" id="@item.IDCategory" style="opacity: 0;" @if(a){ <text>checked="checked"</text> }></span></div>@item.Name<br />
+        }
+    </span>
+</p>

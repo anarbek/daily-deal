@@ -1,0 +1,85 @@
+<Configuration>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:OrderController.cs" caret="2596" fromTop="22" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:Create.cshtml" caret="1020" fromTop="20" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:Edit.cshtml" caret="0" fromTop="0" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Shared/f:_MainFooter.cshtml" caret="3365" fromTop="22" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Shared/f:_Layout.cshtml" caret="739" fromTop="9" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:mainSiteTemplate/d:script/d:menu/f:superfish.css" caret="2669" fromTop="25" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Shared/f:PartialFrontEndTopMenu.cshtml" caret="145" fromTop="1" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Shared/f:_MainHeader.cshtml" caret="967" fromTop="14" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Shared/f:DealsByCityTabbedMenu.cshtml" caret="398" fromTop="5" />
+      <File id="FFB699D2-D87C-433E-9A63-2C1E23DF191C/d:Repositories/f:CategoryRepository.cs" caret="736" fromTop="0" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/f:Web.config" caret="3530" fromTop="23" />
+      <File id="FFB699D2-D87C-433E-9A63-2C1E23DF191C/d:Utils/f:CustomMessages.cs" caret="958" fromTop="25" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:DealsByGroup.cshtml" caret="285" fromTop="8" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:mainSiteTemplate/f:all_deals.html" caret="10467" fromTop="25" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:mainSiteTemplate/f:single_deal.html" caret="4322" fromTop="11" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:MvcHtmlHeplers/f:HtmlHelperExtensions.cs" caret="669" fromTop="14" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:DealsByCategoryPartial.cshtml" caret="1904" fromTop="22" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:DetailPartial.cshtml" caret="36" fromTop="0" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:AccountController.cs" caret="4634" fromTop="43" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:CommonUtils.cs" caret="1082" fromTop="25" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:DealsByCategory.cshtml" caret="0" fromTop="0" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:GroupController.cs" caret="489" fromTop="15" />
+      <File id="FFB699D2-D87C-433E-9A63-2C1E23DF191C/d:Repositories/f:DealRepository.cs" caret="1805" fromTop="26" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Deal/f:Details.cshtml" caret="646" fromTop="30" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Shared/f:_MainLayout.cshtml" caret="646" fromTop="11" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Home/f:Index.cshtml" caret="639" fromTop="27" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:CategoryController.cs" caret="7527" fromTop="41" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:MembershipHelper.cs" caret="2225" fromTop="32" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:HomeController.cs" caret="1685" fromTop="35" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:DealController.cs" caret="11792" fromTop="4" />
+    </RecentFiles>
+    <RecentEdits>
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:CommonUtils.cs" caret="633" fromTop="18" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:MembershipHelper.cs" caret="3038" fromTop="13" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:MembershipHelper.cs" caret="3038" fromTop="23" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:AccountController.cs" caret="4634" fromTop="43" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:CategoryController.cs" caret="6820" fromTop="24" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:CategoryController.cs" caret="6820" fromTop="18" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:MembershipHelper.cs" caret="570" fromTop="12" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:MembershipHelper.cs" caret="3038" fromTop="29" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:CommonUtils.cs" caret="1082" fromTop="25" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:MembershipHelper.cs" caret="1436" fromTop="22" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:MembershipHelper.cs" caret="3038" fromTop="38" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:MembershipHelper.cs" caret="3038" fromTop="38" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:MembershipHelper.cs" caret="3039" fromTop="30" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:CategoryController.cs" caret="6759" fromTop="26" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:CategoryController.cs" caret="6998" fromTop="26" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:CategoryController.cs" caret="7549" fromTop="26" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:GroupController.cs" caret="936" fromTop="30" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:GroupController.cs" caret="1177" fromTop="37" />
+      <File id="FFB699D2-D87C-433E-9A63-2C1E23DF191C/d:Repositories/f:DealRepository.cs" caret="981" fromTop="15" />
+      <File id="FFB699D2-D87C-433E-9A63-2C1E23DF191C/d:Repositories/f:DealRepository.cs" caret="6583" fromTop="25" />
+      <File id="FFB699D2-D87C-433E-9A63-2C1E23DF191C/d:Repositories/f:DealRepository.cs" caret="1805" fromTop="26" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Home/f:Index.cshtml" caret="193" fromTop="8" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Views/d:Home/f:Index.cshtml" caret="639" fromTop="27" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:MembershipHelper.cs" caret="2619" fromTop="43" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:MembershipHelper.cs" caret="2987" fromTop="48" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:HomeController.cs" caret="939" fromTop="21" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:HomeController.cs" caret="652" fromTop="14" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:HomeController.cs" caret="1570" fromTop="27" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:HomeController.cs" caret="1277" fromTop="29" />
+      <File id="791E6DA0-83F0-46A7-B292-A6FDB5A8A300/d:Controllers/f:HomeController.cs" caret="918" fromTop="22" />
+    </RecentEdits>
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir>C:\Program Files (x86)\NUnit 2.5.10\bin\net-2.0\</NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+</Configuration>

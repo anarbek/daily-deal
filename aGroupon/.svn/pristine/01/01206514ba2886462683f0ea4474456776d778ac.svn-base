@@ -1,0 +1,110 @@
+﻿@model aGrouponClasses.Models.tOrder
+@{
+    ViewBag.Title = "OrderDetails";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<style>
+    .info_table td
+    {
+        text-align: left;
+    }
+</style>
+<div class="blog-home">
+    <div class="blog-left">
+        <div class="single-deals-title">
+            Order Details</div>
+        <table class="info_table">
+            <tr>
+                <td>
+                    Order Number
+                </td>
+                <td>@Html.DisplayFor(model => model.IDDeal)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Ordering Time
+                </td>
+                <td>@Html.DisplayFor(model => model.DateAdded)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Notes
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.OrderNotes)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Buyer Notes
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.BuyerNotes)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Coupon
+                </td>
+                <td>
+                    @{string CouponNoFull = Model.tCoupon.CustomCode + " - " + Model.tCoupon.Code;}
+                    @CouponNoFull
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Guide
+                </td>
+                <td>
+                    Before using the coupon, please show the Coupon # and Code to the merchant
+                </td>
+            </tr>
+        </table>
+        
+        <table class="info_table" width="100%">
+            <tr>
+                <td>
+                    Deal name
+                </td>
+                <td>
+                    Price
+                </td>
+                <td>
+                    Quantity
+                </td>
+                <td>
+                    Total
+                </td>
+                <td>
+                    State
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Model.tDeal.DealTitle
+                </td>
+                <td>
+                    @Model.tDeal.DealPrice
+                </td>
+                <td>
+                    @Model.Quantity
+                </td>
+                <td>
+                    @{decimal Total = @Model.Quantity * @Model.tDeal.DealPrice;}
+                    @Total
+                </td>
+                <td>
+                    @Model.RefundStatus
+                </td>
+            </tr>
+        </table>
+        <p>
+            @Html.ActionLink("Back to List", "MyOrders")
+        </p>
+        <!--/text-->
+    </div>
+    <!--/blog-left-->
+</div>
+<!--blog-home-->

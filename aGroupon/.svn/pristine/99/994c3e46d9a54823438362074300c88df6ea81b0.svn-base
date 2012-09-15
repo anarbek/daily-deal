@@ -1,0 +1,85 @@
+﻿@model aGrouponClasses.Models.tOrder
+
+<p>
+                @Html.LabelFor(model => model.tUser,"User Info")
+                <span class="field">
+                    @Html.DisplayFor(model => model.tUser.UserName)
+                </span>
+            </p> 
+
+            <p>
+                @Html.LabelFor(model => model.tDeal,"Deal Info")
+                <span class="field">
+                    @Html.DisplayFor(model => model.tDeal.DealTitle) <br/>
+                </span>
+            </p> 
+
+            <p>
+                @Html.LabelFor(model => model.Quantity,"Quantity")
+                <span class="field">
+                    @Html.DisplayFor(model => model.Quantity) <br/>
+                </span>
+            </p> 
+
+            <p>
+                @Html.LabelFor(model => model.OrderStatus, "Order Status")
+                <span class="field">
+                    @Html.DisplayFor(model => model.OrderStatus) <br/>
+                </span>
+            </p> 
+
+             <p>
+                @Html.LabelFor(model => model.PaymentType, "Payment Type")
+                <span class="field">
+                    @Html.DisplayFor(model => model.PaymentType) <br/>
+                </span>
+            </p> 
+
+             <p>
+                @Html.LabelFor(model => model.DateAdded, "Ordering Time")
+                <span class="field">
+                    @Html.DisplayFor(model => model.PaymentType) <br/>
+                </span>
+            </p> 
+
+            <p>
+                @Html.LabelFor(model => model.ReferrerAddress, "Ordering From")
+                <span class="field">
+                    @Html.DisplayFor(model => model.ReferrerAddress) <br/>
+                </span>
+            </p> 
+
+             <p>
+                @Html.LabelFor(model => model.MobilePhoneNo, "Mobile Phone No")
+                <span class="field">
+                    @Html.DisplayFor(model => model.MobilePhoneNo) <br/>
+                </span>
+            </p> 
+
+            <p>
+                @Html.LabelFor(model => model.BuyerNotes, "Buyer Notes")
+                <span class="field">
+                    @Html.DisplayFor(model => model.BuyerNotes) <br/>
+                </span>
+            </p> 
+
+            <p>
+                @Html.LabelFor(model => model.OrderStatus, "Order Status")
+                <span class="field">
+                    @Html.DisplayFor(model => model.OrderStatus) <br/>
+                </span>
+            </p> 
+
+            <p>
+                @Html.LabelFor(model => model.OrderNotes, "Order Notes")
+                <span class="field">
+                    @Html.TextAreaFor(model => model.OrderNotes,new {rows=5}) <br/>
+                </span>
+            </p> 
+
+             <p>
+                @Html.LabelFor(model => model.RefundStatus, "Refund Policy")
+                <span class="field">
+                    @Html.DisplayFor(model => model.RefundStatus) <br/>
+                </span>
+            </p> 

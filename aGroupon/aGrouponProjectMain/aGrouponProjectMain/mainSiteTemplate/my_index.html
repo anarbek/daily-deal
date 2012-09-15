@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Dealers</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css" />
+<link href="style/reset.css" rel="stylesheet" type="text/css" />
+
+<!--[if IE 8]>
+<link rel="stylesheet" href="style/ie8.css" media="screen, projection" type="text/css" >
+<![endif]-->
+
+<!--[if IE 9]>
+<link rel="stylesheet" href="style/ie9.css" media="screen, projection" type="text/css" >
+<![endif]-->
+
+
+<script src="./script/jquery/jquery-1.5.1.min.js" type="text/javascript"></script>
+<!--MENU-->
+<link rel="stylesheet" media="screen" href="./script/menu/superfish.css" />
+<script src="./script/menu/superfish.js"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+
+        //MENU
+        $("ul.sf-menu").superfish();
+
+
+
+        //BRISANJE ZADNJE LINIJE U MENIJU
+        jQuery('.sf-menu li:last').attr('style', 'background:none');
+        jQuery('.nav-my-profile ul li:last').attr('style', 'background:none');
+
+
+        // HOVER-IMAGES
+        jQuery('.images a').hover(function(){
+           jQuery('img',this).stop().animate({opacity:0.4},500);
+        },function(){
+           jQuery('img',this).stop().animate({opacity:1},300);
+        });
+
+        jQuery('.images-small a').hover(function(){
+           jQuery('img',this).stop().animate({opacity:0.4},500);
+        },function(){
+           jQuery('img',this).stop().animate({opacity:1},300);
+        });
+
+    });
+</script>
+
+</head>
+<body>
+
+<div id="container">
+
+
+
+    <!------ HEADER ------>
+    <div class="header">
+    	<div class="wrapper">
+
+
+
+            <div class="header-left">
+
+                <!--LOGO-->
+                <div class="logo left">
+                    <a href="index.php"><img src="style/img/logo.png" alt="Logo" title="logo" /></a>
+                </div>
+
+
+
+
+
+
+                <!--MENU-->
+                <div class="nav left">
+                    <ul class="sf-menu">
+                        <li  style="padding-left: 0px;" ><a href="index.php">Home</a>
+                        <li  ><a href="about.php">About</a>
+                            <ul class="sub-menu">
+                                <li class="sub-menu-top"></li>
+                                <li><a href="login.html">Login</a></li>
+                                <li><a href="my-profile.php">My profile</a></li>
+                                <li><a href="404.php">404</a></li>
+                                <li class="sub-menu-bottom"></li>
+                            </ul>
+                        </li>
+                        <li ><a href="all-deales.php">All Deales</a>
+                        <li  ><a href="submit.php">Submit Your Deal</a>
+                        <li  style="padding-right: 0;"><a href="contact.php"><img src="style/img/menu-contact.png" alt="images" title="images" /></a>
+                    </ul>
+                </div><!--/nav-->
+
+            </div><!--header-left-->
+
+
+
+
+            <div class="header-right">
+                <div class="header-right-background">
+                    <h3>Sign up for free to get deals directly to your mailbox</h3>
+
+
+                    <!--SEARCH-->
+                    <div class="search-header">
+                        <div class="sidebar_widget_holder">
+                            <form id="searchform">
+                                <input id="s" class="idleField" onfocus="if(value==defaultValue)value=''" onblur="if(value=='')value=defaultValue" value="Enter Your E-mail Address" name="name" />
+                                <a id="searchsubmit" href="#">Subscribe Me</a>
+                            </form>
+                        </div><!--/sidebar_widget_holder-->
+                    </div><!--search-header-->
+
+                    <div class="pecat"></div>
+
+                </div><!--header-right-background-->
+            </div><!--header-right-->
+
+
+        </div><!--/wrapper-->
+    </div><!--/header-->
+	
+	
+	<!--Content Here-->
+	
+<!------ CONTENT ------>
+    <div class="content">
+        <div class="wrapper">
+
+            <div class="content-background">
+                <div class="content-wripper">
+
+
+
+                    <!-- BLOG -->
+                    <div class="blog-home">
+                        <div class="blog-left">
+                            <div class="title-blog"><a href="single-deales.php">This is one very amazing deal</a></div><!--/title-blog-->
+                            <div class="images">
+                                <a href="single-deales.php"><img src="style/img/blog-images.jpg" alt="images" title="images"  /></a>
+                            </div><!--/images-->
+                            <div class="text">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            </div><!--/text-->
+                        </div><!--/blog-left-->
+
+                        <div class="blog-right">
+                            <div class="blog-right-text">
+                                <span style="padding-top: 22px;">This deal will end in:</span><br />
+                                <p style="padding-top: 12px;">6 days 1 hrs 52 min 51 sec</p><br />
+                                <span style="padding-top: 25px; margin-bottom: -10px;">Discount</span><br />
+                                <h5>43%</h5>
+                                <div class="blog-right-dwo">
+                                    <span>Deal Value</span><br />
+                                    <p style="margin-top: 0;">$47</p>
+                                </div><!--blog-right-dwo-->
+                                <div class="blog-right-dwo">
+                                    <span>You Save</span><br />
+                                    <p style="margin-top: 0;">$20</p>
+                                </div><!--blog-right-dwo-->
+
+                                <div class="twitter-facebook">NEMOJ DA ZABORAVIS</div>
+                            </div><!--blog-right-text-->
+
+                            <div class="blog-right-button">
+                                <a href="#">
+                                    <div class="button">
+                                        <div class="blog-right-left"></div>
+                                        <div class="blog-right-center">Buy this deal - 27$</div>
+                                        <div class="blog-right-right"></div>
+                                    </div>
+                                </a><!--/button-->
+                            </div><!--/blog-right-button-->
+                        </div><!--blog-right-->
+                    </div><!--blog-home-->
+
+
+
+
+                    <!-- BORDER-HORIZONTAL -->
+                    <div class="border-horizontal"></div>
+
+
+
+
+                    <!-- SPONZORI-LOGO -->
+                    <div class="sponzori-logo"></div>
+
+
+
+
+                    <!-- BORDER-HORIZONTAL -->
+                    <div class="border-horizontal"></div>
+
+
+
+
+                    <!-- BLOG-SMALL -->
+                    <div class="blog-small-home">
+
+                        <div class="blog-small">
+                            <div class="title-blog-small"><a href="single-deales.php">Lorem Ipsum  Dolor Deal</a></div><!--/title-blog-small-->
+                            <div class="images-small">
+                                <a href="single-deales.php"><img src="style/img/blog-small-images1.jpg" alt="images" title="images"  /></a>
+                                <div class="statistic">
+                                    <ul>
+                                        <li>Deal Value<p>$47</p></li>
+                                        <li class="statistic-border"></li>
+                                        <li>Discount<p>40%</p></li>
+                                        <li class="statistic-border"></li>
+                                        <li>You Save<p>$20</p></li>
+                                    </ul>
+                                </div><!--statistic-->
+                            </div><!--/images-small-->
+                            <div class="blog-small-button">
+                                <p>71 days 23 hrs 38  min36 sec</p>
+                                <div class="small-button">
+                                    <a href="#">
+                                        <div class="button">
+                                            <div class="small-left"></div>
+                                            <div class="small-center">SEE DEAL</div>
+                                            <div class="small-right"></div>
+                                        </div>
+                                    </a><!--/button-->
+                                </div><!--/small-button-->
+                            </div><!--/blog-small-button-->
+                        </div><!--/blog-small-->
+
+                        <div class="border-vertical"></div>
+
+                        <div class="blog-small">
+                            <div class="title-blog-small"><a href="single-deales.php">Lorem Ipsum  Dolor Deal</a></div><!--/title-blog-small-->
+                            <div class="images-small">
+                                <a href="single-deales.php"><img src="style/img/blog-small-images2.jpg" alt="images" title="images"  /></a>
+                                <div class="statistic">
+                                    <ul>
+                                        <li>Deal Value<p>$47</p></li>
+                                        <li class="statistic-border"></li>
+                                        <li>Discount<p>40%</p></li>
+                                        <li class="statistic-border"></li>
+                                        <li>You Save<p>$20</p></li>
+                                    </ul>
+                                </div><!--statistic-->
+                            </div><!--/images-small-->
+                            <div class="blog-small-button">
+                                <p>71 days 23 hrs 38  min36 sec</p>
+                                <div class="small-button">
+                                    <a href="#">
+                                        <div class="button">
+                                            <div class="small-left"></div>
+                                            <div class="small-center">SEE DEAL</div>
+                                            <div class="small-right"></div>
+                                        </div>
+                                    </a><!--/button-->
+                                </div><!--/small-button-->
+                            </div><!--/blog-small-button-->
+                        </div><!--/blog-small-->
+
+                        <div class="border-vertical"></div>
+
+                        <div class="blog-small">
+                            <div class="title-blog-small"><a href="single-deales.php">Lorem Ipsum  Dolor Deal</a></div><!--/title-blog-small-->
+                            <div class="images-small">
+                                <a href="single-deales.php"><img src="style/img/blog-small-images1.jpg" alt="images" title="images"  /></a>
+                                <div class="statistic">
+                                    <ul>
+                                        <li>Deal Value<p>$47</p></li>
+                                        <li class="statistic-border"></li>
+                                        <li>Discount<p>40%</p></li>
+                                        <li class="statistic-border"></li>
+                                        <li>You Save<p>$20</p></li>
+                                    </ul>
+                                </div><!--statistic-->
+                            </div><!--/images-small-->
+                            <div class="blog-small-button">
+                                <p>71 days 23 hrs 38  min36 sec</p>
+                                <div class="small-button">
+                                    <a href="#">
+                                        <div class="button">
+                                            <div class="small-left"></div>
+                                            <div class="small-center">SEE DEAL</div>
+                                            <div class="small-right"></div>
+                                        </div>
+                                    </a><!--/button-->
+                                </div><!--/small-button-->
+                            </div><!--/blog-small-button-->
+                        </div><!--/blog-small-->
+
+                    </div><!--blog-small-home-->
+
+
+
+
+                </div><!--content-wripper-->
+            </div><!--content-background-->
+
+        </div><!--/wrapper-->
+    </div><!--/content-->
+	
+	<!--Content End-->
+	
+	
+	
+	    <!------ FOOTER ------>
+    <div class="footer">
+        <div class="wrapper">
+            <div class="footer-background">
+                <div class="footer-wripper">
+
+
+
+                    <!--TEXT WIDGET-->
+                    <div class="footer_box">
+                        <h3>About Our Brand</h3>
+                        <div class="textwidget">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.</p>
+                        </div><!--text-widget-->
+                    </div><!--/footer_box -->
+
+
+
+
+                    <div class="border-vertical"></div>
+
+
+
+                    <!--TWITTER WIDGET-->
+                    <div class="footer_box">
+                        <h3>Twitter Buzz</h3>
+                        <ul class="twitter_ul">
+                            <li>
+                                <div class="box-twitter-center">
+                                    <span>7 Photoshop tips for designing clean and modern websites</span>
+                                    <a href="#">
+                                    <div class="twittime">su.pr/1ruOpp</div></a>
+                                </div>
+                                <div class="twitter-links-t"><span>1Day Ago</span></div>
+                            </li>
+                            <li>
+                                <div class="box-twitter-center">
+                                    <span>7 Photoshop tips for designing clean and modern websites</span>
+                                    <a href="#" style="font-size:85%">
+                                    <div class="twittime">su.pr/1ruOpp</div></a>
+                                </div>
+                                <div class="twitter-links-t"><span>1Day Ago</span></div>
+                            </li>
+                        </ul>
+                    </div><!--/footer_box-->
+
+
+
+                    <div class="border-vertical"></div>
+
+
+
+                    <!--CUSTOM MENU-->
+                    <div class="footer_box">
+                        <h3 class="sidebar_widgettitle">Other Pages</h3>
+
+                        <div class="menu-menu-container">
+                            <ul class="menu">
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">About Our Deals</a></li>
+                                <li><a href="#">All Deals</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div><!--footer_box-->
+
+
+
+
+                </div><!--content-wripper-->
+            </div><!--footer-background-->
+
+
+
+            <!--FOOTER-COPY-->
+            <div class="footer-copy">
+                <div class="copy-text">
+                    Copyright Information Goes Here 2010. All Rights Reserved.<br />
+                    Designed by  <a href="#">Themesaholic</a>
+                </div><!--copy-text-->
+            </div><!--footer-copy-->
+
+
+
+        </div><!--/wrapper-->
+    </div><!--/footer-->
+
+
+</div><!--/container-->
+
+</body>
+</html>

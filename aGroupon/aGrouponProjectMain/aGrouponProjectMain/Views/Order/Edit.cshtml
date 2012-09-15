@@ -1,0 +1,103 @@
+﻿@model aGrouponClasses.Models.tOrder
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section CustomJS{
+    <script type="text/javascript" src="@Url.Content("~/adminTemplate/js/plugins/jquery.validate.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/CustomAdminFunctions.js")"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            ArrangeSubmitForm(jQuery("#add-form"), jQuery("#btnSubmit"));
+            ArrangeSubmitFormRefund(jQuery("#refund-form"), jQuery("#btnSubmitRefund"));     
+        });
+
+        function ArrangeSubmitForm(formToSubmit, submitBt) {
+            formToSubmit.submit(function (event) {
+                // Stop full page load
+                event.preventDefault();
+                if (ajaxValidate(formToSubmit, submitBt)) {         
+                    var data = { IDOrder: jQuery("#IDOrder").val(), OrderNotes: jQuery("#OrderNotes").val() };
+                    var target = jQuery(formToSubmit).attr('action');
+                    SubmitData(target, submitBt, data);
+                }
+            });
+        }
+
+        function ArrangeSubmitFormRefund(formToSubmit, submitBt) {
+            formToSubmit.submit(function (event) {
+                // Stop full page load
+                event.preventDefault();
+                if (ajaxValidate(formToSubmit, submitBt)) {
+                    var data = { IDOrder: jQuery("#IDOrder").val(), RefundStatus: jQuery("#RefundStatus").val() };
+                    var target = jQuery(formToSubmit).attr('action');
+                    SubmitData(target, submitBt, data);
+                }
+            });
+        }
+
+        
+    </script>
+}
+
+<div class="pageheader">
+    <ul class="hornav">
+        <li class="current"><a href="#cats">Order Detail Form</a></li>
+    </ul>
+</div>
+<!--pageheader-->
+<div id="contentwrapper" class="contentwrapper">
+    <div id="cats" class="subcontent">
+    <div id="DescriptionDiv"></div>
+        @using (Html.BeginForm("EditAjax", "Order", FormMethod.Post, new { id = "add-form", @class = "stdform stdform2" })) {
+            @Html.ValidationSummary(true)
+           
+            @Html.Partial("_CreateOrEdit", Model)
+            @Html.HiddenFor(model => model.IDOrder)  
+            <p class="stdformbutton">
+                <button class="submit radius2" id="btnSubmit">
+                    Submit</button>
+                <input type="reset" class="reset radius2" value="Reset Form" />
+            </p>
+            
+            
+        }
+        <br />
+
+    </div>
+    @if (Model.RefundStatus == (int)aGrouponClasses.Utils.Enums.enmRefundStatus.OrderSuccessful) {
+    <div id="cts" class="subcontent">
+        
+        @using (Html.BeginForm("EditOrderRefundStatusAjax", "Order", FormMethod.Post, new { id = "refund-form", @class = "stdform stdform2" })) {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.IDOrder)  
+            <p>
+                <label>
+                    Refund Status</label>
+                <span class="field">
+                    @Html.DropDownListFor(model => model.RefundStatus, ((List<aGrouponProjectMain.Controllers.RefundModel>)ViewBag.RefundStatuses).Select(option => new SelectListItem {
+                   Text = (option == null ? "None" : option.Name),
+                   Value = option.IDRefundStatus.ToString(),
+                   Selected = (Model != null) && (option.IDRefundStatus == Model.RefundStatus)
+               }), "Select Refund Status...", new { @class = "required", @title = "Please select a refund Status!" })
+                </span>
+                @Html.ValidationMessageFor(model => model.RefundStatus)
+            </p>
+            <p class="stdformbutton">
+                <button class="submit radius2" id="btnSubmitRefund">
+                    Submit Refund</button>
+                
+            </p>
+            
+            
+        }
+         <br />
+    </div>
+    }
+    <!-- #cities -->
+     <p>
+        @Html.ActionLink("Back to List", @Url.Content("~/AdminIndex"))
+    </p>
+</div>
+<!--contentwrapper-->

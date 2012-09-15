@@ -1,0 +1,56 @@
+﻿@model aGrouponProjectMain.Controllers.tOrderAdminModel
+@{
+    ViewBag.Title = "AdminIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section CustomJS{
+    <script type="text/javascript" src="@Url.Content("~/adminTemplate/js/plugins/jquery.dataTables.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/adminTemplate/js/plugins/jquery.uniform.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/CustomAdminFunctions.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/CustomAdminListFunctions.js")"></script>
+     <script type="text/javascript">
+        var couponsUsable;
+        jQuery(document).ready(function () {
+            couponsUsable = jQuery('#ordersTable')
+            .dataTable({
+                "bProcessing": true,
+                "sAjaxSource": "/Order/GetOrderJSonByPaidStatus?PaidStatus=" + @Model.PaidStatus,
+                "sPaginationType": "full_numbers",
+                "aaSortingFixed": [[0, 'asc']],
+                "fnInitComplete": function(oSettings, json) {
+                     /* Add a select menu for each TH element in the table footer */
+                    jQuery("tfoot th").each(function (i) {
+                        if (jQuery(this).attr('name') == 'Filterable') {
+                            var colData = couponsUsable.fnGetColumnData(i);
+                            console.log("coldata:"  + colData);
+                            this.innerHTML = fnCreateSelect(colData);
+                            jQuery('select', this).change(function () {
+                                couponsUsable.fnFilter(jQuery(this).val(), i);
+                            });
+                        }
+                    });
+                }   
+            });
+        });
+        
+    </script>
+}
+
+<div class="pageheader">
+            <h1 class="pagetitle">@Model.OrderStatusName Orders</h1>
+            <span class="pagedesc">Manage @Model.OrderStatusName Orders Here</span>
+            
+            <ul class="hornav">
+                <li class="current"><a href="#Orders">Orders List</a></li>
+            </ul>
+        </div><!--pageheader-->
+        
+        <div id="contentwrapper" class="contentwrapper">
+        	<div id="Coupons" class="subcontent">
+                <p id="DescriptionDiv"></p>
+               @Html.Partial("_OrderListPartial") 
+            </div><!-- #cities -->
+
+            
+        
+        </div><!--contentwrapper-->

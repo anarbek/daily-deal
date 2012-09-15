@@ -1,0 +1,62 @@
+﻿@model aGrouponClasses.Models.tDeal
+@{
+    ViewBag.Title = "PartnerDealDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="pageheader">
+    <h1 class="pagetitle">
+        </h1>
+    <span class="pagedesc"></span>
+    <ul class="hornav">
+        <li class="current"><a href="#Orders">Deal Details</a></li>
+    </ul>
+</div>
+<!--pageheader-->
+<div id="contentwrapper" class="contentwrapper">
+    <div id="Coupons" class="subcontent">
+        <p id="DescriptionDiv">
+        </p>
+        <fieldset>
+            <legend>tDeal</legend>
+            <div class="display-label">
+                Title</div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.DealTitle)
+            </div>
+            <div class="display-label">
+                Begin Time</div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.DateStarting)
+            </div>
+            <div class="display-label">
+                End Time</div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.DateEnding)
+            </div>
+            <div class="display-label">
+                Current State</div>
+            <div class="display-field">
+            </div>
+            <div class="display-label">
+                Quote</div>
+            <div class="display-field">
+                Minimum: @Html.DisplayFor(model => model.QuantityMinimum) Maximum:
+            </div>
+            <div class="display-label">
+                Deal Pricing</div>
+            <div class="display-field">
+                Market Price @Html.DisplayFor(model => model.MarketPrice) Item Price : @Html.DisplayFor(model => model.DealPrice)
+            </div>
+            <div class="display-label">
+                Deal Category</div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.tCategory.Name)
+            </div>
+        </fieldset>
+        <p>
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+    <!-- #cities -->
+</div>
+<!--contentwrapper-->
